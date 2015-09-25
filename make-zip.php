@@ -105,20 +105,21 @@ function get_theme_tags( $theme, $stylesheet ) {
   $pattern = '/^Tags:\s?[a-z,\s-]+$/mi';
   preg_match( $pattern, $stylesheet, $matches );
 
-  // Remove prefix and split into an array
+  // Remove prefix and split tag string into an array
   $tags = str_replace( 'Tags: ', '', $matches[0] );
   $tags = explode( ',' , $tags );
 
-  // If the tag in question is in our list of available tags on .org, add it to a new string
-  $org_tag_string = 'Tags: ';
+  // If the tag in question is in our list of available tags on .org, add it to an array
+  $org_tags = array();
   foreach ( $tags as $tag ) :
-    if ( in_array( trim($tag), $org_allowed_tags ) ) :
-      $org_tag_string .= $tag . ',';
+    if ( in_array( trim( $tag ), $org_allowed_tags ) ) :
+      $org_tags[] .= trim( $tag );
     endif;
-
-  // Strip the final comma
-  //$org_tag_string = rtrim( $org_tag_string, ', ' );
   endforeach;
+
+  // Create a new, properly-formatted tag string
+  $org_tag_string = 'Tags: ' . implode( ', ', $org_tags );
+
   return $org_tag_string;
 }
 
@@ -206,7 +207,6 @@ $new_footer = update_footer_credit( $footer_URI, $theme );
 write_file( $footer_URI, $new_footer );
 
 // Create new theme zip:
-//zip -r THEMENAME.zip . -x "*/\.*"
 if ( zipper( $theme_dir, $theme . '.zip' ) ) :
   echo ( 'All done! Now, download <a href="' . $theme . '.zip">' . $theme . '.zip</a> and send it to <a href="https://wordpress.org/themes/upload/">the nice people at WordPress.org</a>.' );
 endif;
