@@ -35,7 +35,7 @@ function delete_file( $URI ) {
   unlink( $URI );
 }
 
-// Create a zip with all our files
+// Create a zip of all files in a given directory
 function zipper( $directory, $filename ) {
 	// Determine our current directory path
 	$path = realpath( $directory );
@@ -64,38 +64,38 @@ function zipper( $directory, $filename ) {
 	return $zip;
 }
 
-// Download the theme from our Showcase
-$url  = 'https://public-api.wordpress.com/rest/v1/themes/download/' . $theme . '.zip';
-$file = $theme . '.zip';
-
-$fp = fopen($file, 'w');
-
-$ch = curl_init($url);
-curl_setopt($ch, CURLOPT_FILE, $fp);
-
-$data = curl_exec($ch);
-
-curl_close($ch);
-fclose($fp);
-
-// Unzip it!
-$path = pathinfo(realpath($file), PATHINFO_DIRNAME);
-$zip = new ZipArchive;
-$res = $zip->open($file);
-if ($res === TRUE) {
-  // extract it to the path we determined above
-  $zip->extractTo($path);
-  $zip->close();
-  delete_file($file);
-} else {
-  echo "Oh no! I couldn't open $file";
+// Download a file from a given URI
+function download_file( $URI, $filename ) {
+  $fp = fopen($filename, 'w');
+  $ch = curl_init($URI);
+  curl_setopt($ch, CURLOPT_FILE, $fp);
+  $data = curl_exec($ch);
+  curl_close($ch);
+  fclose($fp);
 }
 
-// Get path to pub dir
-$pub_path = '../pub/';
-$original_stylesheet_URI = $pub_path . $theme.'/style.css';
+// Download the theme from our Showcase
+$theme_zip = $theme . '.zip';
+download_file( 'https://public-api.wordpress.com/rest/v1/themes/download/' . $theme . '.zip', $theme_zip );
 
-$stylesheet = read_file( $original_stylesheet_URI );
+// Unzip it!
+$path = pathinfo( realpath( $theme_zip ), PATHINFO_DIRNAME );
+$zip = new ZipArchive;
+$res = $zip->open( $theme_zip );
+if ( $res === TRUE ) {
+  // extract it to the path we determined above
+  $zip->extractTo( $path );
+  $zip->close();
+  delete_file( $theme_zip );
+} else {
+  exit( "Oh no! I couldn't open $theme_zip." );
+}
+
+// Download our stylesheet from the public svn repo
+$theme_stylesheet = $theme . '.css';
+download_file( 'https://wpcom-themes.svn.automattic.com/' . $theme . '/style.css', $theme_stylesheet );
+$stylesheet = read_file( $theme_stylesheet );
+delete_file( $theme_stylesheet );
 
 // Get a list of tags for the .org version of the theme
 function get_theme_tags( $theme, $stylesheet ) {
