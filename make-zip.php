@@ -35,6 +35,34 @@ function delete_file( $URI ) {
   unlink( $URI );
 }
 
+// Create a zip with all our files
+function zipper( $directory, $filename ) {
+	// Determine our current directory path
+	$path = realpath( $directory );
+
+	// Initialize archive object
+	$zip = new ZipArchive();
+	$zip->open( $filename, ZipArchive::CREATE | ZipArchive::OVERWRITE );
+
+	// Recursively iterate through our directory to find all files
+	$objects = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $path ), RecursiveIteratorIterator::SELF_FIRST );
+	$files = array();
+	foreach( $objects as $name => $file ) :
+		// Make sure our file is a file and determine its relative path
+		if ( $file->isFile() ) :
+			$file_path = $file->getRealPath();
+			$relative_file_path = substr( $file_path, strlen( $path ) + 1 );
+			$files[] = $relative_file_path;
+
+			// Add current file to archive
+  	$zip->addFile( $file_path, $relative_file_path );
+  endif;
+	endforeach;
+
+	// Close our zip to create it
+	$zip->close();
+	return $zip;
+}
 
 // Download the theme from our Showcase
 $url  = 'https://public-api.wordpress.com/rest/v1/themes/download/' . $theme . '.zip';
@@ -52,7 +80,6 @@ fclose($fp);
 
 // Unzip it!
 $path = pathinfo(realpath($file), PATHINFO_DIRNAME);
-
 $zip = new ZipArchive;
 $res = $zip->open($file);
 if ($res === TRUE) {
@@ -180,3 +207,6 @@ write_file( $footer_URI, $new_footer );
 
 // Create new theme zip:
 //zip -r THEMENAME.zip . -x "*/\.*"
+if ( zipper( $theme_dir, $theme . '.zip' ) ) :
+  echo ( 'All done! Now, download <a href="' . $theme . '.zip">' . $theme . '.zip</a> and send it to <a href="https://wordpress.org/themes/upload/">the nice people at WordPress.org</a>.' );
+endif;
