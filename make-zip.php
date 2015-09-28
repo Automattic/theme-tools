@@ -15,7 +15,6 @@ else :
   endif;
 endif;
 
-
 // Read file data
 function read_file( $URI ) {
   $handle = fopen( $URI, 'r' ) or die( 'Cannot open file:  '.$URI );
@@ -35,32 +34,56 @@ function delete_file( $URI ) {
   unlink( $URI );
 }
 
+// Delete an entire directory of files
+function delete_directory( $directory ) {
+    $files = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator( $directory, RecursiveDirectoryIterator::SKIP_DOTS ),
+        RecursiveIteratorIterator::CHILD_FIRST
+    );
+
+    foreach ( $files as $fileinfo ) {
+        $todo = ( $fileinfo->isDir() ? 'rmdir' : 'unlink' );
+        $todo( $fileinfo->getRealPath() );
+    }
+
+    if ( rmdir( $directory ) ):
+        return true;
+    else:
+        return false;
+    endif;
+
+}
+
 // Create a zip of all files in a given directory
 function zipper( $directory, $filename ) {
-	// Determine our current directory path
-	$path = realpath( $directory );
+    // Determine our current directory path
+    $path = realpath( $directory );
 
-	// Initialize archive object
-	$zip = new ZipArchive();
-	$zip->open( $filename, ZipArchive::CREATE | ZipArchive::OVERWRITE );
+    // Initialize archive object
+    $zip = new ZipArchive();
+    $zip->open( $filename, ZipArchive::CREATE | ZipArchive::OVERWRITE );
 
-	// Recursively iterate through our directory to find all files
-	$objects = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $path ), RecursiveIteratorIterator::SELF_FIRST );
-	$files = array();
-	foreach( $objects as $name => $file ) :
-		// Make sure our file is a file and determine its relative path
-		if ( $file->isFile() ) :
-			$file_path = $file->getRealPath();
-			$relative_file_path = substr( $file_path, strlen( $path ) + 1 );
-			$files[] = $relative_file_path;
+    // Recursively iterate through our directory to find all files
+    $objects = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $path ), RecursiveIteratorIterator::SELF_FIRST );
+    $files_to_delete = array();
+    foreach( $objects as $name => $file ) :
+    	// Make sure our file is a file and determine its relative path
+    	if ( $file->isFile() ) :
+    		$file_path = $file->getRealPath();
+    		$relative_file_path = substr( $file_path, strlen( $path ) + 1 );
+    		$files_to_delete[] = $file_path;
 
-			// Add current file to archive
-  	$zip->addFile( $file_path, $relative_file_path );
-  endif;
-	endforeach;
+    		// Add current file to archive
+      	$zip->addFile( $file_path, $relative_file_path );
+      endif;
+    endforeach;
 
-	// Close our zip to create it
-	$zip->close();
+    // Close our zip to create it
+    $zip->close();
+
+    // Delete all our original files
+    delete_directory( $directory );
+
 	return $zip;
 }
 
