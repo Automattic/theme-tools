@@ -161,7 +161,7 @@ $footer_URI = $theme_dir . 'footer.php';
 // Make sure the theme URI is set correctly
 function set_theme_URI( $theme, $stylesheet ) {
   $pattern = '/^Theme URI:\s?([a-z\:\/\.]+)$/mi';
-  $theme_URI = 'https://wordpress.com/themes/' . $theme;
+  $theme_URI = 'https://wordpress.com/themes/' . $theme . '/';
   $replacement = 'Theme URI: ' . $theme_URI;
   $stylesheet = preg_replace($pattern, $replacement, $stylesheet );
   return $stylesheet;
