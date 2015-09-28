@@ -1,10 +1,10 @@
-# An Automattic tool
+# .org theme directory submission tool
 
-Want to submit your theme to WordPress.org, but you're frustrated by all the little steps? Never fear! Use this script and be free. 
+This is specifically designed for submitting WordPress.com themes to the WordPress.org repo. If you're not doing that, this probably won't be much use to you. That said, there may be some patterns in here you'll be able to reuse for your own projects. Cannibalise away!
 
 # How to use it
 
-Download make-zip.php (that's all you need) and put it on a web server that has PHP. Your localhost is a good idea. No web server? Try something like [MAMP](https://mamp.info). It's super-simple to set up. Go ahead, we'll wait. 
+Download make-zip.php (that's all you need; everything else is a work-in-progress) and put it on a web server that has PHP. Your localhost is a good idea. No web server? Try something like [MAMP](https://mamp.info). It's super-simple to set up. Go ahead, we'll wait. 
 
 Got it? Okay. 
 
