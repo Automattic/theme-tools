@@ -232,5 +232,9 @@ write_file( $footer_URI, $new_footer );
 
 // Create new theme zip:
 if ( zipper( $theme_dir, $theme . '.zip' ) ) :
-  echo ( 'All done! Now, download <a href="' . $theme . '.zip">' . $theme . '.zip</a> and send it to <a href="https://wordpress.org/themes/upload/">the nice people at WordPress.org</a>.' );
+  if (PHP_SAPI === 'cli') :
+    echo ( 'All done! Grab ' . $theme . '.zip at ' . __DIR__ . ' and send it to WordPress.org (https://wordpress.org/themes/upload/) today!' . PHP_EOL );
+  else:
+    echo ( 'All done! Now, download <a href="' . $theme . '.zip">' . $theme . '.zip</a> and send it to <a href="https://wordpress.org/themes/upload/">the nice people at WordPress.org</a>.' );
+  endif;
 endif;
