@@ -194,6 +194,7 @@ function edit_pot( $pot_URI ) {
 
 // Update the Underscores copyright year, if necessary.
 function update_s_copyright( $stylesheet ) {
+  date_default_timezone_set('UTC');
   $pattern = '/Underscores\shttp:\/\/underscores\.me\/?,?\s?\(C\)\s\d+-\d+/mi';
   $replacement = 'Underscores http://underscores.me/ (C) 2012-' . date( 'Y' );
   $stylesheet = preg_replace( $pattern, $replacement, $stylesheet );
