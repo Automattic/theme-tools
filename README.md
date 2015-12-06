@@ -1,15 +1,9 @@
-# .org theme directory submission tool
+# Theme Tools
 
-This is specifically designed for submitting WordPress.com themes to the WordPress.org repo. If you're not doing that, this probably won't be much use to you. That said, there may be some patterns in here you'll be able to reuse for your own projects. Cannibalise away!
+This repository houses a collection of scripts and micro-tools, designed to help theme builders build better themes. Ideally our collection of tools will grow as we find more processes that can be improved and automated.
 
-# How to use it
+In-depth READMEs for each tool can be found in that tool's directory.
 
-Download make-zip.php (that's all you need; everything else is a work-in-progress) and put it on a web server that has PHP. Your localhost is a good idea. No web server? Try something like [MAMP](https://mamp.info). It's super-simple to set up. Go ahead, we'll wait. 
+What's here (so far):
 
-Got it? Okay. 
-
-Load up the file in your web browser, passing the theme slug as your parameter, like so: 
-
-`http://localhost:8888/folder/make-zip.php?theme=[theme-slug]`
-
-Et voila! If everything's worked, the script will give you back a .zip containing a theme that's .org-upload-ready. 
+- theme-to-org: A script that downloads a theme from WordPress.com and packages it up for submission to the WordPress.org theme directory.
