@@ -67,7 +67,7 @@ class Theme_Plugin_Enhancements {
 				if ( ' ' !== $dependency_list ) :
 					$dependency_list .= ', ';
 				endif;
-				$dependency_list .= $dependency['name'];
+				$dependency_list .= $dependency['name'] . ' (' . $dependency['module'] . ')';
 			endforeach;
 
 			$this->plugins = array(
@@ -75,7 +75,7 @@ class Theme_Plugin_Enhancements {
 					'slug'    => 'jetpack',
 	    		'name'    => 'Jetpack by WordPress.com',
 	    		'message' => __( "The Jetpack plugin is needed to use some of this theme's special features, including: ", 'textdomain' ),
-					'modules' => $dependency_list,
+					'modules' => $dependency_list . '.',
 				)
 			);
 		// Otherwise, return early
@@ -106,6 +106,7 @@ class Theme_Plugin_Enhancements {
 				'name' => 'Site Logo',
 				'slug' => 'site-logo',
 				'url'  => '',
+				'module' => 'no particular module activation needed',
 			);
 		endif;
 
@@ -114,6 +115,7 @@ class Theme_Plugin_Enhancements {
 				'name' => 'Featured Content',
 				'slug' => 'featured-content',
 				'url'  => '',
+				'module' => 'no particular module activation needed',
 			);
 		endif;
 
@@ -122,6 +124,7 @@ class Theme_Plugin_Enhancements {
 				'name' => 'Menus',
 				'slug' => 'nova_menu_item',
 				'url'  => '',
+				'module' => 'Custom Content Types module',
 			);
 		endif;
 
@@ -130,6 +133,7 @@ class Theme_Plugin_Enhancements {
 				'name' => 'Comics',
 				'slug' => 'jetpack-comic',
 				'url'  => '',
+				'module' => 'Custom Content Types module',
 			);
 		endif;
 
@@ -138,6 +142,7 @@ class Theme_Plugin_Enhancements {
 				'name' => 'Testimonials',
 				'slug' => 'jetpack-testimonial',
 				'url'  => '',
+				'module' => 'Custom Content Types module',
 			);
 		endif;
 
@@ -146,6 +151,7 @@ class Theme_Plugin_Enhancements {
 				'name' => 'Portfolio',
 				'slug' => 'jetpack-portfolio',
 				'url'  => '',
+				'module' => 'Custom Content Types module',
 			);
 		endif;
 
@@ -183,6 +189,7 @@ class Theme_Plugin_Enhancements {
 				$this->plugins[$key]['status'] = 'to-install';
 				$this->display_notice = true;
 			}
+
 		}
 
 	}
@@ -201,7 +208,6 @@ class Theme_Plugin_Enhancements {
 			if ( isset( $plugin['message'] ) ) {
 				$notice .= esc_html( $plugin['message'] );
 				$notice .= esc_html( $plugin['modules'] );
-				$notice .= '<br>';
 			}
 
 			// Activation message
