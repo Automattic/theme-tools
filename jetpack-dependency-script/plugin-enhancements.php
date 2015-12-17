@@ -46,6 +46,7 @@ class Theme_Plugin_Enhancements {
 	 * either not installed or not activated, alert the user.
 	 */
 	function __construct() {
+
 		/* We only want to display the notice on the Dashboard and in Themes.
 		 * Return early if we are on a different screen
 		 */
@@ -54,19 +55,34 @@ class Theme_Plugin_Enhancements {
 			return;
 		}
 
-		// Return early if the theme as not declared any plugin enhancements.
-		if ( ! $this->theme_has_enhancements()  ) {
-			return;
-		}
-
 		// Get the plugin enhancements information declared by the theme.
-		$this->plugins = $this->get_theme_plugin_enhancements();
+		$this->dependencies = $this->get_theme_dependencies();
 
-		// Return if no plugin enhancements have been declared by the theme.
-					var_dump( $this->plugins );
-		if ( ! $this->plugins ) {
+		// If we have plugin dependencies, build an array to list all the required dependencies
+		if ( ! empty( $this->dependencies ) ) {
+			$dependency_list = ' ';
+
+			// Create a list of dependencies
+			foreach ( $this->dependencies as $dependency ) :
+				if ( ' ' !== $dependency_list ) :
+					$dependency_list .= ', ';
+				endif;
+				$dependency_list .= $dependency['name'];
+			endforeach;
+
+			$this->plugins = array(
+				array(
+					'slug'    => 'jetpack',
+	    		'name'    => 'Jetpack by WordPress.com',
+	    		'message' => __( "The Jetpack plugin is needed to use some of this theme's special features, including: ", 'textdomain' ),
+					'modules' => $dependency_list,
+				)
+			);
+		// Otherwise, return early
+		} else {
 			return;
 		}
+
 
 		/* Set the status of each of these enhancements and determine if a
 		 * notice is needed.
@@ -79,24 +95,61 @@ class Theme_Plugin_Enhancements {
 		}
 	}
 
-	/**
-	 * Checks whether the theme has declared any plugin enhancements.
+	/*
+	 * Let's see which modules (if any!) this theme relies on.
+	 *
 	 */
-	function theme_has_enhancements() {
-		return current_theme_supports( 'theme-plugin-enhancements' );
-	}
+	function get_theme_dependencies() {
 
-	/**
-	 * Returns the plugin enhancements declared by the theme.
-	 */
-	function get_theme_plugin_enhancements() {
-		$enhancements = get_theme_support( 'theme-plugin-enhancements' );
+		if ( current_theme_supports( 'site-logo' ) ) :
+			$dependencies['logo'] = array(
+				'name' => 'Site Logo',
+				'slug' => 'site-logo',
+				'url'  => '',
+			);
+		endif;
 
-		if ( ! is_array( $enhancements ) ) {
-			return false;
-		} else {
-			return $enhancements[0];
-		}
+		if ( current_theme_supports( 'featured-content' ) ) :
+			$dependencies['featured-content'] = array(
+				'name' => 'Featured Content',
+				'slug' => 'featured-content',
+				'url'  => '',
+			);
+		endif;
+
+		if ( current_theme_supports( 'nova_menu_item' ) ) :
+			$dependencies['menus'] = array(
+				'name' => 'Menus',
+				'slug' => 'nova_menu_item',
+				'url'  => '',
+			);
+		endif;
+
+		if ( current_theme_supports( 'jetpack-comic' ) ) :
+			$dependencies['comics'] = array(
+				'name' => 'Comics',
+				'slug' => 'jetpack-comic',
+				'url'  => '',
+			);
+		endif;
+
+		if ( current_theme_supports( 'jetpack-testimonial' ) ) :
+			$dependencies['testimonials'] = array(
+				'name' => 'Testimonials',
+				'slug' => 'jetpack-testimonial',
+				'url'  => '',
+			);
+		endif;
+
+		if ( current_theme_supports( 'jetpack-portfolio' ) ) :
+			$dependencies['portfolios'] = array(
+				'name' => 'Portfolio',
+				'slug' => 'jetpack-portfolio',
+				'url'  => '',
+			);
+		endif;
+
+		return $dependencies;
 	}
 
 	/**
@@ -147,6 +200,8 @@ class Theme_Plugin_Enhancements {
 			// Custom message provided by the theme.
 			if ( isset( $plugin['message'] ) ) {
 				$notice .= esc_html( $plugin['message'] );
+				$notice .= esc_html( $plugin['modules'] );
+				$notice .= '<br>';
 			}
 
 			// Activation message
