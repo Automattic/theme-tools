@@ -88,7 +88,9 @@ class Theme_Plugin_Enhancements {
 				array(
 					'slug'    => 'jetpack',
 	    		'name'    => 'Jetpack by WordPress.com',
-	    		'message' => __( "The Jetpack plugin is needed to use some of this theme's special features, including: ", 'textdomain' ),
+	    		'message' =>  sprintf(
+							__( 'The %1$s is required to use some of this theme’s features, including: ', 'textdomain' ),
+							'<strong>' . __( 'Jetpack plugin', 'textdomain' ) . '</strong>' ),
 					'modules' => $dependency_list . '.',
 				)
 			);
@@ -159,7 +161,7 @@ class Theme_Plugin_Enhancements {
 
 		if ( current_theme_supports( 'jetpack-portfolio' ) ) :
 			$dependencies['portfolios'] = array(
-				'name' => 'Portfolio',
+				'name' => 'Portfolios',
 				'slug' => 'jetpack-portfolio',
 				'url'  => '',
 				'module' => 'custom-content-types',
@@ -175,7 +177,7 @@ class Theme_Plugin_Enhancements {
    */
 	 function get_module_name( $module ) {
 		 $module_names = array (
-				'none'                 => __( 'no particular module activation needed', 'textdomain' ),
+				'none'                 => __( 'no specific module needed', 'textdomain' ),
 				'custom-content-types' => __( 'Custom Content Types module', 'textdomain' ),
 		 );
 		 return $module_names[$module];
@@ -245,7 +247,7 @@ class Theme_Plugin_Enhancements {
 
 			// Custom message provided by the theme.
 			if ( isset( $plugin['message'] ) ) {
-				$notice .= esc_html( $plugin['message'] );
+				$notice .= $plugin['message'];
 				$notice .= esc_html( $plugin['modules'] );
 			}
 
@@ -275,15 +277,22 @@ class Theme_Plugin_Enhancements {
 		// Output a notice if we're missing a module
 		foreach( $this->unactivated_modules as $module => $features ) :
 			$featurelist = '';
+			$count = 1;
+			$total = count( $features );
 			foreach ( $features as $feature ) :
-				if ( '' !== $featurelist ) :
+				if ( $total === $count && 2 === $count ) :
+					$featurelist .= ' or ';
+				elseif ( $total === $count && $count > 2 ) :
+					$featurelist .= ', or ';
+				elseif ( 1 < $count ) :
 					$featurelist .= ', ';
 				endif;
 				$featurelist .= $feature;
+				$count++;
 			endforeach;
 			$notice .= '<p>';
 			$notice .=  sprintf(
-							__( 'To use this theme’s special features (%1$s) you need to activate Jetpack’s %2$s', 'textdomain' ),
+							__( 'To use %1$s, please activate the Jetpack plugin’s %2$s.', 'textdomain' ),
 							esc_html( $featurelist ),
 							'<strong>' . esc_html( $this->get_module_name( $module ) ) . '</strong>'
 						);
