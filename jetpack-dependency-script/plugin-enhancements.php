@@ -2,7 +2,7 @@
 /**************************************************************************
 
 Plugin Name:  Theme Plugin Enhancements
-Plugin URI:
+Plugin URI:		
 Description:  Inform a theme user of plugins that will extend their theme's functionality.
 Version:      0.1
 Author:       Automattic
@@ -47,11 +47,11 @@ class Theme_Plugin_Enhancements {
 	 */
 	function __construct() {
 
-		/* We only want to display the notice on the Dashboard and in Themes.
-		 * Return early if we are on a different screen
+		/* We only want to display the notice on the Dashboard, Themes, and Plugins pages.
+		 * Return early if we are on a different screen.
 		 */
 		$screen = get_current_screen();
-		if ( ! ( 'dashboard' == $screen->base || 'themes' == $screen->base ) ) {
+		if ( ! ( 'dashboard' == $screen->base || 'themes' == $screen->base || 'plugins' == $screen->base ) ) {
 			return;
 		}
 
