@@ -7,7 +7,7 @@ Returns a list of selectors using the given color. Can also print font selectors
 
 To install, download the [installer script](https://raw.githubusercontent.com/Automattic/theme-tools/master/getselectors/installer.sh) and run it where you want the tool installed:
 
-    ./installer.sh
+    bash installer.sh
 
 The installer will create a directory called `getselectors`, containing the tool's files, and will download all the npm dependencies required to run.
 
