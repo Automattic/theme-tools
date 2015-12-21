@@ -1,0 +1,14 @@
+{
+  "name": "getselectors",
+  "description": "Get CSS Selectors using a specific color",
+  "version": "1.0.3",
+  "private": "true",
+  "engines": {
+    "node": ">= 0.10.x"
+  },
+  "dependencies": {
+    "minimist": "1.2.0",
+    "colors": "1.1.2",
+    "css": "2.2.1"
+  }
+}
