@@ -5,7 +5,7 @@ Returns a list of selectors using the given color. Can also print font selectors
 
 ### Install
 
-The following steps will install the tool globally on your OSX user. Run the following commands one by one on your Terminal:
+The following steps will install the tool globally on your OSX user. Run the following commands on your Terminal:
 
     cd ~/Library
 	curl -sO https://raw.githubusercontent.com/Automattic/theme-tools/master/getselectors/installer.sh
@@ -13,7 +13,7 @@ The following steps will install the tool globally on your OSX user. Run the fol
 	
 Now, we need to register the command globally. For this, we need to edit your `~/.profile` file and add and alias:
 
-To edit the file, run `open ~/.profile` – Then add the following code at the very bottom of the file, if it's not empty:
+To edit the file, run `open ~/.profile` – Then add the following code at the very bottom of the file:
 
     # Get Selectors tool – https://github.com/Automattic/theme-tools
     alias getselectors='node ~/Library/getselectors/getselectors.js'
