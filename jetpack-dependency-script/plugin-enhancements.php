@@ -1,26 +1,28 @@
 <?php
-/**************************************************************************
-
-Plugin Name:  Theme Plugin Enhancements
-Plugin URI:		
-Description:  Inform a theme user of plugins that will extend their theme's functionality.
-Version:      0.1
-Author:       Automattic
-Author URI:   http://automattic.com
-License:      GPLv2 or later
-
-**************************************************************************/
+/**
+ * Plugin Name:  Theme Plugin Enhancements
+ * Plugin URI:	 https://github.com/Automattic/theme-tools/
+ * Description:  Inform a theme user of plugins that will extend their theme's functionality.
+ * Version:      0.1
+ * Author:       Automattic
+ * Author URI:   http://automattic.com
+ * License:      GPLv2 or later
+ *
+ * @package      textdomain
+ * @subpackage
+ * @author       Automattic
+ * @copyright    2015
+ */
 
 class Theme_Plugin_Enhancements {
 
 	/**
-	 * Holds the information of the plugins declared as enhancements
-	 * by the theme.
+	 * @var array; holds the information of the plugins declared as enhancements
 	 */
 	var $plugins;
 
 	/**
-	 * Whether to display an admin notice or not
+	 * @var boolean; whether to display an admin notice or not.
 	 */
 	var $display_notice = false;
 
@@ -30,8 +32,8 @@ class Theme_Plugin_Enhancements {
 	static function init() {
 		static $instance = false;
 
-		if ( ! $instance )
-			$instance = new Theme_Plugin_Enhancements;
+		if ( ! $instance ) {
+			$instance = new Theme_Plugin_Enhancements; }
 
 		return $instance;
 	}
@@ -47,59 +49,56 @@ class Theme_Plugin_Enhancements {
 	 */
 	function __construct() {
 
-		/* We only want to display the notice on the Dashboard, Themes, and Plugins pages.
-		 * Return early if we are on a different screen.
-		 */
+		// We only want to display the notice on the Dashboard, Themes, and Plugins pages.
+		// Return early if we are on a different screen.
 		$screen = get_current_screen();
-		if ( ! ( 'dashboard' == $screen->base || 'themes' == $screen->base || 'plugins' == $screen->base ) ) {
+		if ( ! ( 'dashboard' === $screen->base || 'themes' === $screen->base || 'plugins' === $screen->base ) ) {
 			return;
 		}
 
 		// Get the plugin enhancements information declared by the theme.
 		$this->dependencies = $this->get_theme_dependencies();
 
-		// Return early if we have no plugin dependencies
+		// Return early if we have no plugin dependencies.
 		if ( empty( $this->dependencies ) ) :
 			return;
 
-		// Otherwise, build an array to list all the required dependencies and modules
+			// Otherwise, build an array to list all the required dependencies and modules.
 		else :
 			$dependency_list = ' ';
 			$this->modules = array();
 
-			// Create a list of dependencies
+			// Create a list of dependencies.
 			foreach ( $this->dependencies as $dependency ) :
 
 				if ( ' ' !== $dependency_list ) :
 					$dependency_list .= ', ';
 				endif;
 
-				// Add to our list of recommended modules
+				// Add to our list of recommended modules.
 				if ( 'none' !== $dependency['module'] ) :
-					$this->modules[$dependency['name']] = $dependency['module'];
+					$this->modules[ $dependency['name'] ] = $dependency['module'];
 				endif;
 
-				// Build human-readable list
+				// Build human-readable list.
 				$dependency_list .= $dependency['name'] . ' (' . $this->get_module_name( $dependency['module'] ) . ')';
 			endforeach;
 
-			// Define our Jetpack plugin as a required plugin
+			// Define our Jetpack plugin as a required plugin.
 			$this->plugins = array(
 				array(
 					'slug'    => 'jetpack',
 	    		'name'    => 'Jetpack by WordPress.com',
-	    		'message' =>  sprintf(
-							__( 'The %1$s is required to use some of this theme’s features, including: ', 'textdomain' ),
-							'<strong>' . __( 'Jetpack plugin', 'textdomain' ) . '</strong>' ),
+	    		'message' => sprintf(
+					__( 'The %1$s is required to use some of this theme’s features, including: ', 'textdomain' ),
+				'<strong>' . __( 'Jetpack plugin', 'textdomain' ) . '</strong>' ),
 					'modules' => $dependency_list . '.',
-				)
+				),
 			);
 
 		endif;
 
-		/* Set the status of each of these enhancements and determine if a
-		 * notice is needed.
-		 */
+		// Set the status of each of these enhancements and determine if a notice is needed.
 		$this->set_plugin_status();
 		$this->set_module_status();
 
@@ -109,7 +108,7 @@ class Theme_Plugin_Enhancements {
 		}
 	}
 
-	/*
+	/**
 	 * Let's see which modules (if any!) this theme relies on.
 	 */
 	function get_theme_dependencies() {
@@ -171,17 +170,19 @@ class Theme_Plugin_Enhancements {
 		return $dependencies;
 	}
 
-	/*
- 	 * Set the name of our modules. This is just so we can easily refer to them in
+	/**
+	 * Set the name of our modules. This is just so we can easily refer to them in
 	 * a nice, consistent, human-readable way.
-   */
-	 function get_module_name( $module ) {
-		 $module_names = array (
-				'none'                 => __( 'no specific module needed', 'textdomain' ),
-				'custom-content-types' => __( 'Custom Content Types module', 'textdomain' ),
-		 );
-		 return $module_names[$module];
- 	}
+	 *
+	 * @param var $module The slug of the Jetpack module in question.
+	 */
+	function get_module_name( $module ) {
+		$module_names = array(
+			   'none'                 => __( 'no specific module needed', 'textdomain' ),
+			   'custom-content-types' => __( 'Custom Content Types module', 'textdomain' ),
+		);
+		return $module_names[ $module ];
+	}
 
 	/**
 	 * Determine the status of each of the plugins declared as a dependency
@@ -196,39 +197,34 @@ class Theme_Plugin_Enhancements {
 			// Determine whether a plugin is installed.
 			if ( in_array( $plugin['name'], $installed_plugin_names ) ) {
 
-				/* Determine whether the plugin is active. If yes, remove if from
-				 * the array containing the plugin enhancements.
-				 */
+				// Determine whether the plugin is active. If yes, remove if from
+				// the array containing the plugin enhancements.
 				if ( is_plugin_active( array_search( $plugin['name'], $installed_plugin_names ) ) ) {
-					unset( $this->plugins[$key] );
-				}
-
-				// Set the plugin status as to-activate.
+					unset( $this->plugins[ $key ] );
+				} // Set the plugin status as to-activate.
 				else {
-					$this->plugins[$key]['status'] = 'to-activate';
+					$this->plugins[ $key ]['status'] = 'to-activate';
 					$this->display_notice = true;
 				}
 
-			// Set the plugin status as to-install.
+				// Set the plugin status as to-install.
 			} else {
-				$this->plugins[$key]['status'] = 'to-install';
+				$this->plugins[ $key ]['status'] = 'to-install';
 				$this->display_notice = true;
 			}
-
 		}
 	}
 
-	/*
-   * For Jetpack modules, we want to check and see if those modules are actually activated.
-   *
-   */
- 	function set_module_status() {
+	/**
+	 * For Jetpack modules, we want to check and see if those modules are actually activated.
+	 */
+	function set_module_status() {
 		$this->unactivated_modules = array();
-		// Loop through each module to check if it's active
+		// Loop through each module to check if it's active.
 		foreach ( $this->modules as $feature => $module ) :
 			if ( class_exists( 'Jetpack' ) && ! Jetpack::is_module_active( $module ) ) :
 				// Add this feature to our array.
-				$this->unactivated_modules[$module][] = $feature;
+				$this->unactivated_modules[ $module ][] = $feature;
 				$this->display_notice = true;
 
 			endif;
@@ -242,7 +238,7 @@ class Theme_Plugin_Enhancements {
 		$notice = '';
 
 		// Loop through the plugins and print the message and the download or active links.
-		foreach( $this->plugins as $key => $plugin ) {
+		foreach ( $this->plugins as $key => $plugin ) {
 			$notice .= '<p>';
 
 			// Custom message provided by the theme.
@@ -251,31 +247,31 @@ class Theme_Plugin_Enhancements {
 				$notice .= esc_html( $plugin['modules'] );
 			}
 
-			// Activation message
-			if ( 'to-activate' == $plugin['status'] ) {
-				$activate_url =  $this->plugin_activate_url( $plugin['slug'] );
-				$notice .=  sprintf(
-								__( ' Please activate %1$s. %2$s', 'textdomain' ),
-								esc_html( $plugin['name'] ),
-								( $activate_url ) ? '<a href="' . $activate_url . '">' . __( 'Activate', 'textdomain' ) . '</a>' : ''
-							);
+			// Activation message.
+			if ( 'to-activate' === $plugin['status'] ) {
+				$activate_url = $this->plugin_activate_url( $plugin['slug'] );
+				$notice .= sprintf(
+					__( ' Please activate %1$s. %2$s', 'textdomain' ),
+					esc_html( $plugin['name'] ),
+					( $activate_url ) ? '<a href="' . $activate_url . '">' . __( 'Activate', 'textdomain' ) . '</a>' : ''
+				);
 			}
 
-			// Download message
-			if ( 'to-install' == $plugin['status'] ) {
-				$install_url =  $this->plugin_install_url( $plugin['slug'] );
-				$notice .=  sprintf(
-								__( ' Please install %1$s. %2$s', 'textdomain' ),
-								esc_html( $plugin['name'] ),
-								( $install_url ) ? '<a href="' . $install_url . '">' . __( 'Install', 'textdomain' ) . '</a>' : ''
-							);
+			// Download message.
+			if ( 'to-install' === $plugin['status'] ) {
+				$install_url = $this->plugin_install_url( $plugin['slug'] );
+				$notice .= sprintf(
+					__( ' Please install %1$s. %2$s', 'textdomain' ),
+					esc_html( $plugin['name'] ),
+					( $install_url ) ? '<a href="' . $install_url . '">' . __( 'Install', 'textdomain' ) . '</a>' : ''
+				);
 			}
 
-			$notice .=  '</p>';
+			$notice .= '</p>';
 		}
 
-		// Output a notice if we're missing a module
-		foreach( $this->unactivated_modules as $module => $features ) :
+		// Output a notice if we're missing a module.
+		foreach ( $this->unactivated_modules as $module => $features ) :
 			$featurelist = '';
 			$count = 1;
 			$total = count( $features );
@@ -291,26 +287,25 @@ class Theme_Plugin_Enhancements {
 				$count++;
 			endforeach;
 			$notice .= '<p>';
-			$notice .=  sprintf(
-							__( 'To use %1$s, please activate the Jetpack plugin’s %2$s.', 'textdomain' ),
-							esc_html( $featurelist ),
-							'<strong>' . esc_html( $this->get_module_name( $module ) ) . '</strong>'
-						);
+			$notice .= sprintf(
+				__( 'To use %1$s, please activate the Jetpack plugin’s %2$s.', 'textdomain' ),
+				esc_html( $featurelist ),
+				'<strong>' . esc_html( $this->get_module_name( $module ) ) . '</strong>'
+			);
 			$notice .= '</p>';
 		endforeach;
-
 
 		// Output notice HTML.
 		printf(
 			'<div id="message" class="notice notice-warning is-dismissible">%s</div>',
-			$notice
+			wp_kses( $notice, array( 'strong' ) )
 		);
 	}
 
 	/**
 	 * Helper function to return the URL for activating a plugin.
 	 *
-	 * Uses the plugin slug to determine what plugin to activate.
+	 * @param var $slug Plugin slug; determines which plugin to activate.
 	 */
 	function plugin_activate_url( $slug ) {
 		// Find the path to the plugin.
@@ -336,15 +331,16 @@ class Theme_Plugin_Enhancements {
 	/**
 	 * Helper function to return the URL for installing a plugin.
 	 *
-	 * Uses the plugin slug to determine what plugin to install.
+	 * @param var $slug Plugin slug; determines which plugin to install.
 	 */
-     function plugin_install_url( $slug ) {
-		 /* Include Plugin Install Administration API to get access to the
-		  * plugins_api() function
-		  */
-		 include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+	function plugin_install_url( $slug ) {
+		/*
+		Include Plugin Install Administration API to get access to the
+		 * plugins_api() function
+		 */
+		include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
 
-         $plugin_information = plugins_api( 'plugin_information', array( 'slug' => $slug ) );
+		$plugin_information = plugins_api( 'plugin_information', array( 'slug' => $slug ) );
 
 		if ( is_wp_error( $plugin_information ) ) {
 			return false;
@@ -355,7 +351,5 @@ class Theme_Plugin_Enhancements {
 			);
 		}
 	}
-
-
 }
 add_action( 'admin_head', array( 'Theme_Plugin_Enhancements', 'init' ) );
