@@ -22,6 +22,7 @@ To edit the file, run `touch ~/.profile; open -e ~/.profile` – Then add the fo
     
 After saving the file, the `getselectors` command will be readily available on new Terminal Tabs and Windows. Enjoy!
 
+
 ### Standalone Install
 
 To install, download the [installer script](https://raw.githubusercontent.com/Automattic/theme-tools/master/getselectors/installer.sh) and run it where you want the tool installed:
@@ -29,6 +30,12 @@ To install, download the [installer script](https://raw.githubusercontent.com/Au
     bash installer.sh
 
 The installer will create a directory called `getselectors`, containing the tool's files, and will download all the npm dependencies required to run.
+
+### Updating
+
+To update the tool, run the updater script from _outside_ the installation directory:
+
+    ./getselectors/updater.sh
 
 ### Usage:
 

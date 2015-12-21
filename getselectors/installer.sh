@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-##################################
-## Get Selectors tool installer ##
-##################################
+########################################
+## getselectors – Installation script ##
+########################################
 
 DIR="getselectors"
 WORKDIR="work"
