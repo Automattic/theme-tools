@@ -296,9 +296,17 @@ class Theme_Plugin_Enhancements {
 		endforeach;
 
 		// Output notice HTML.
+		$allowed = array(
+			'p' => array(),
+	    'strong' => array(),
+	    'em'     => array(),
+	    'b'      => array(),
+	    'i'      => array(),
+	    'a'     => array( 'href' => array() ),
+		);
 		printf(
 			'<div id="message" class="notice notice-warning is-dismissible">%s</div>',
-			wp_kses( $notice, array( 'strong' ) )
+			wp_kses( $notice, $allowed )
 		);
 	}
 
