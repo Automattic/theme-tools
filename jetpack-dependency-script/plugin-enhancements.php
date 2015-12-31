@@ -8,8 +8,7 @@
  * Author URI:   http://automattic.com
  * License:      GPLv2 or later
  *
- * @package      textdomain
- * @subpackage
+ * @package      TEXTDOMAIN
  * @author       Automattic
  * @copyright    2015
  */
