@@ -21,3 +21,13 @@ To run the script from the command line, navigate to the script's containing fol
 `php make-zip.php [theme-slug]`
 
 A zip file will be created in the same directory.
+
+# Want to include the Jetpack Dependency Script?
+
+Simple! Just pass an argument to the command:
+
+`php make-zip.php [theme-slug] jetpack`
+
+or
+
+`http://localhost:8888/folder/make-zip.php?theme=[theme-slug]&jetpack=true`
