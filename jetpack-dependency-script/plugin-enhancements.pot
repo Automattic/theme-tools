@@ -1,0 +1,35 @@
+#: inc/plugin-enhancements.php:92
+msgid "The %1$s is required to use some of this theme’s features, including: "
+msgstr ""
+
+#: inc/plugin-enhancements.php:93
+msgid "Jetpack plugin"
+msgstr ""
+
+#: inc/plugin-enhancements.php:180
+msgid "no specific module needed"
+msgstr ""
+
+#: inc/plugin-enhancements.php:181
+msgid "Custom Content Types module"
+msgstr ""
+
+#: inc/plugin-enhancements.php:253
+msgid "Please activate %1$s. %2$s"
+msgstr ""
+
+#: inc/plugin-enhancements.php:255
+msgid "Activate"
+msgstr ""
+
+#: inc/plugin-enhancements.php:263
+msgid "Please install %1$s. %2$s"
+msgstr ""
+
+#: inc/plugin-enhancements.php:265
+msgid "Install"
+msgstr ""
+
+#: inc/plugin-enhancements.php:290
+msgid "To use %1$s, please activate the Jetpack plugin’s %2$s."
+msgstr ""
