@@ -89,7 +89,7 @@ class Theme_Plugin_Enhancements {
 					'slug'    => 'jetpack',
 	    		'name'    => 'Jetpack by WordPress.com',
 	    		'message' => sprintf(
-					__( 'The %1$s is required to use some of this theme’s features, including: ', 'textdomain' ),
+					__( 'The %1$s is required to use some of this theme\'s features, including: ', 'textdomain' ),
 				'<strong>' . __( 'Jetpack plugin', 'textdomain' ) . '</strong>' ),
 					'modules' => $dependency_list . '.',
 				),
@@ -287,7 +287,7 @@ class Theme_Plugin_Enhancements {
 			endforeach;
 			$notice .= '<p>';
 			$notice .= sprintf(
-				__( 'To use %1$s, please activate the Jetpack plugin’s %2$s.', 'textdomain' ),
+				__( 'To use %1$s, please activate the Jetpack plugin\'s %2$s.', 'textdomain' ),
 				esc_html( $featurelist ),
 				'<strong>' . esc_html( $this->get_module_name( $module ) ) . '</strong>'
 			);
