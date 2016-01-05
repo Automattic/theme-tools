@@ -1,5 +1,5 @@
 #: inc/plugin-enhancements.php:92
-msgid "The %1$s is required to use some of this theme's features, including: "
+msgid "The %1$s is required to use some of this theme&rsquo;s features, including: "
 msgstr ""
 
 #: inc/plugin-enhancements.php:93
@@ -31,5 +31,5 @@ msgid "Install"
 msgstr ""
 
 #: inc/plugin-enhancements.php:290
-msgid "To use %1$s, please activate the Jetpack plugin's %2$s."
+msgid "To use %1$s, please activate the Jetpack plugin&rsquo;s %2$s."
 msgstr ""
