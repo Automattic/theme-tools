@@ -266,20 +266,18 @@ class Theme_Plugin_Enhancements {
 
 		// Output a notice if we're missing a module.
 		foreach ( $this->unactivated_modules as $module => $features ) :
-			$featurelist = '';
-			$count = 1;
-			$total = count( $features );
-			foreach ( $features as $feature ) :
-				if ( $total === $count && 2 === $count ) :
-					$featurelist .= ' or ';
-				elseif ( $total === $count && $count > 2 ) :
-					$featurelist .= ', or ';
-				elseif ( 1 < $count ) :
-					$featurelist .= ', ';
-				endif;
-				$featurelist .= $feature;
-				$count++;
-			endforeach;
+			$featurelist = array();
+			foreach ( $features as $feature ) {
+				$featurelist[] = $feature;
+			}
+
+			if ( 1 < count( $featurelist ) ) {
+				$last_feature = array_pop( $featurelist );
+				$featurelist  = implode( ', ', $featurelist ) . ' or ' . $last_feature;
+			} else {
+				$featurelist  = implode( ', ', $featurelist );
+			}
+
 			$notice .= '<p>';
 			$notice .= sprintf(
 				__( 'To use %1$s, please activate the Jetpack plugin&rsquo;s %2$s.', 'textdomain' ),
