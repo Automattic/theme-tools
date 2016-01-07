@@ -60,43 +60,36 @@ class Theme_Plugin_Enhancements {
 		$this->dependencies = $this->get_theme_dependencies();
 
 		// Return early if we have no plugin dependencies.
-		if ( empty( $this->dependencies ) ) :
+		if ( empty( $this->dependencies ) )
 			return;
 
-			// Otherwise, build an array to list all the required dependencies and modules.
-		else :
-			$dependency_list = ' ';
-			$this->modules = array();
+		// Otherwise, build an array to list all the required dependencies and modules.
+		$dependency_list = '';
+		$this->modules = array();
 
-			// Create a list of dependencies.
-			foreach ( $this->dependencies as $dependency ) :
+		// Create a list of dependencies.
+		foreach ( $this->dependencies as $dependency ) :
 
-				if ( ' ' !== $dependency_list ) :
-					$dependency_list .= ', ';
-				endif;
+			// Add to our list of recommended modules.
+			if ( 'none' !== $dependency['module'] ) :
+				$this->modules[ $dependency['name'] ] = $dependency['module'];
+			endif;
 
-				// Add to our list of recommended modules.
-				if ( 'none' !== $dependency['module'] ) :
-					$this->modules[ $dependency['name'] ] = $dependency['module'];
-				endif;
+			// Build human-readable list.
+			$dependency_list .= $dependency['name'] . ' (' . $this->get_module_name( $dependency['module'] ) . '), ';
+		endforeach;
 
-				// Build human-readable list.
-				$dependency_list .= $dependency['name'] . ' (' . $this->get_module_name( $dependency['module'] ) . ')';
-			endforeach;
-
-			// Define our Jetpack plugin as a required plugin.
-			$this->plugins = array(
-				array(
-					'slug'    => 'jetpack',
-					'name'    => 'Jetpack by WordPress.com',
-					'message' => sprintf(
-						__( 'The %1$s is required to use some of this theme&rsquo;s features, including: ', 'textdomain' ),
-						'<strong>' . __( 'Jetpack plugin', 'textdomain' ) . '</strong>' ),
-					'modules' => $dependency_list . '.',
-				),
-			);
-
-		endif;
+		// Define our Jetpack plugin as a required plugin.
+		$this->plugins = array(
+			array(
+				'slug'    => 'jetpack',
+				'name'    => 'Jetpack by WordPress.com',
+				'message' => sprintf(
+					__( 'The %1$s is required to use some of this theme&rsquo;s features, including: ', 'textdomain' ),
+					'<strong>' . __( 'Jetpack plugin', 'textdomain' ) . '</strong>' ),
+				'modules' => rtrim( $dependency_list, ', ' ) . '.',
+			),
+		);
 
 		// Set the status of each of these enhancements and determine if a notice is needed.
 		$this->set_plugin_status();
