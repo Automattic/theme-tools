@@ -52,7 +52,7 @@ class Theme_Plugin_Enhancements {
 		// We only want to display the notice on the Dashboard, Themes, and Plugins pages.
 		// Return early if we are on a different screen.
 		$screen = get_current_screen();
-		if ( ! ( 'dashboard' === $screen->base || 'themes' === $screen->base || 'plugins' === $screen->base ) ) {
+		if ( ! in_array( $screen->base, array( 'dashboard', 'themes', 'plugins' ) ) ) {
 			return;
 		}
 
