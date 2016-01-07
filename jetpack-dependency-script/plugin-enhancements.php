@@ -175,7 +175,7 @@ class Theme_Plugin_Enhancements {
 	 * Set the name of our modules. This is just so we can easily refer to them in
 	 * a nice, consistent, human-readable way.
 	 *
-	 * @param var $module The slug of the Jetpack module in question.
+	 * @param string $module The slug of the Jetpack module in question.
 	 */
 	function get_module_name( $module ) {
 		$module_names = array(
@@ -314,7 +314,7 @@ class Theme_Plugin_Enhancements {
 	/**
 	 * Helper function to return the URL for activating a plugin.
 	 *
-	 * @param var $slug Plugin slug; determines which plugin to activate.
+	 * @param string $slug Plugin slug; determines which plugin to activate.
 	 */
 	function plugin_activate_url( $slug ) {
 		// Find the path to the plugin.
@@ -340,7 +340,7 @@ class Theme_Plugin_Enhancements {
 	/**
 	 * Helper function to return the URL for installing a plugin.
 	 *
-	 * @param var $slug Plugin slug; determines which plugin to install.
+	 * @param string $slug Plugin slug; determines which plugin to install.
 	 */
 	function plugin_install_url( $slug ) {
 		/*
