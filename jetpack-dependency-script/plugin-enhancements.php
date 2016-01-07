@@ -112,6 +112,7 @@ class Theme_Plugin_Enhancements {
 	 * Let's see which modules (if any!) this theme relies on.
 	 */
 	function get_theme_dependencies() {
+		$dependencies = array();
 
 		if ( current_theme_supports( 'site-logo' ) ) :
 			$dependencies['logo'] = array(
