@@ -32,7 +32,8 @@ class Theme_Plugin_Enhancements {
 		static $instance = false;
 
 		if ( ! $instance ) {
-			$instance = new Theme_Plugin_Enhancements; }
+			$instance = new Theme_Plugin_Enhancements;
+		}
 
 		return $instance;
 	}
@@ -87,10 +88,10 @@ class Theme_Plugin_Enhancements {
 			$this->plugins = array(
 				array(
 					'slug'    => 'jetpack',
-	    		'name'    => 'Jetpack by WordPress.com',
-	    		'message' => sprintf(
-					__( 'The %1$s is required to use some of this theme&rsquo;s features, including: ', 'textdomain' ),
-				'<strong>' . __( 'Jetpack plugin', 'textdomain' ) . '</strong>' ),
+					'name'    => 'Jetpack by WordPress.com',
+					'message' => sprintf(
+						__( 'The %1$s is required to use some of this theme&rsquo;s features, including: ', 'textdomain' ),
+						'<strong>' . __( 'Jetpack plugin', 'textdomain' ) . '</strong>' ),
 					'modules' => $dependency_list . '.',
 				),
 			);
@@ -177,8 +178,8 @@ class Theme_Plugin_Enhancements {
 	 */
 	function get_module_name( $module ) {
 		$module_names = array(
-			   'none'                 => __( 'no specific module needed', 'textdomain' ),
-			   'custom-content-types' => __( 'Custom Content Types module', 'textdomain' ),
+			'none'                 => __( 'no specific module needed', 'textdomain' ),
+			'custom-content-types' => __( 'Custom Content Types module', 'textdomain' ),
 		);
 		return $module_names[ $module ];
 	}
@@ -296,12 +297,12 @@ class Theme_Plugin_Enhancements {
 
 		// Output notice HTML.
 		$allowed = array(
-			'p' => array(),
-	    'strong' => array(),
-	    'em'     => array(),
-	    'b'      => array(),
-	    'i'      => array(),
-	    'a'     => array( 'href' => array() ),
+			'p'      => array(),
+			'strong' => array(),
+			'em'     => array(),
+			'b'      => array(),
+			'i'      => array(),
+			'a'      => array( 'href' => array() ),
 		);
 		printf(
 			'<div id="message" class="notice notice-warning is-dismissible">%s</div>',
@@ -342,7 +343,7 @@ class Theme_Plugin_Enhancements {
 	 */
 	function plugin_install_url( $slug ) {
 		/*
-		Include Plugin Install Administration API to get access to the
+		 * Include Plugin Install Administration API to get access to the
 		 * plugins_api() function
 		 */
 		include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
