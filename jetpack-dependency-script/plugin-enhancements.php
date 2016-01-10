@@ -32,7 +32,8 @@ class Theme_Plugin_Enhancements {
 		static $instance = false;
 
 		if ( ! $instance ) {
-			$instance = new Theme_Plugin_Enhancements; }
+			$instance = new Theme_Plugin_Enhancements;
+		}
 
 		return $instance;
 	}
@@ -51,7 +52,7 @@ class Theme_Plugin_Enhancements {
 		// We only want to display the notice on the Dashboard, Themes, and Plugins pages.
 		// Return early if we are on a different screen.
 		$screen = get_current_screen();
-		if ( ! ( 'dashboard' === $screen->base || 'themes' === $screen->base || 'plugins' === $screen->base ) ) {
+		if ( ! in_array( $screen->base, array( 'dashboard', 'themes', 'plugins' ) ) ) {
 			return;
 		}
 
@@ -59,43 +60,36 @@ class Theme_Plugin_Enhancements {
 		$this->dependencies = $this->get_theme_dependencies();
 
 		// Return early if we have no plugin dependencies.
-		if ( empty( $this->dependencies ) ) :
+		if ( empty( $this->dependencies ) )
 			return;
 
-			// Otherwise, build an array to list all the required dependencies and modules.
-		else :
-			$dependency_list = ' ';
-			$this->modules = array();
+		// Otherwise, build an array to list all the required dependencies and modules.
+		$dependency_list = '';
+		$this->modules = array();
 
-			// Create a list of dependencies.
-			foreach ( $this->dependencies as $dependency ) :
+		// Create a list of dependencies.
+		foreach ( $this->dependencies as $dependency ) :
 
-				if ( ' ' !== $dependency_list ) :
-					$dependency_list .= ', ';
-				endif;
+			// Add to our list of recommended modules.
+			if ( 'none' !== $dependency['module'] ) :
+				$this->modules[ $dependency['name'] ] = $dependency['module'];
+			endif;
 
-				// Add to our list of recommended modules.
-				if ( 'none' !== $dependency['module'] ) :
-					$this->modules[ $dependency['name'] ] = $dependency['module'];
-				endif;
+			// Build human-readable list.
+			$dependency_list .= $dependency['name'] . ' (' . $this->get_module_name( $dependency['module'] ) . '), ';
+		endforeach;
 
-				// Build human-readable list.
-				$dependency_list .= $dependency['name'] . ' (' . $this->get_module_name( $dependency['module'] ) . ')';
-			endforeach;
-
-			// Define our Jetpack plugin as a required plugin.
-			$this->plugins = array(
-				array(
-					'slug'    => 'jetpack',
-	    		'name'    => 'Jetpack by WordPress.com',
-	    		'message' => sprintf(
+		// Define our Jetpack plugin as a required plugin.
+		$this->plugins = array(
+			array(
+				'slug'    => 'jetpack',
+				'name'    => 'Jetpack by WordPress.com',
+				'message' => sprintf(
 					__( 'The %1$s is required to use some of this theme&rsquo;s features, including: ', 'textdomain' ),
-				'<strong>' . __( 'Jetpack plugin', 'textdomain' ) . '</strong>' ),
-					'modules' => $dependency_list . '.',
-				),
-			);
-
-		endif;
+					'<strong>' . __( 'Jetpack plugin', 'textdomain' ) . '</strong>' ),
+				'modules' => rtrim( $dependency_list, ', ' ) . '.',
+			),
+		);
 
 		// Set the status of each of these enhancements and determine if a notice is needed.
 		$this->set_plugin_status();
@@ -111,6 +105,7 @@ class Theme_Plugin_Enhancements {
 	 * Let's see which modules (if any!) this theme relies on.
 	 */
 	function get_theme_dependencies() {
+		$dependencies = array();
 
 		if ( current_theme_supports( 'site-logo' ) ) :
 			$dependencies['logo'] = array(
@@ -173,12 +168,12 @@ class Theme_Plugin_Enhancements {
 	 * Set the name of our modules. This is just so we can easily refer to them in
 	 * a nice, consistent, human-readable way.
 	 *
-	 * @param var $module The slug of the Jetpack module in question.
+	 * @param string $module The slug of the Jetpack module in question.
 	 */
 	function get_module_name( $module ) {
 		$module_names = array(
-			   'none'                 => __( 'no specific module needed', 'textdomain' ),
-			   'custom-content-types' => __( 'Custom Content Types module', 'textdomain' ),
+			'none'                 => __( 'no specific module needed', 'textdomain' ),
+			'custom-content-types' => __( 'Custom Content Types module', 'textdomain' ),
 		);
 		return $module_names[ $module ];
 	}
@@ -271,20 +266,20 @@ class Theme_Plugin_Enhancements {
 
 		// Output a notice if we're missing a module.
 		foreach ( $this->unactivated_modules as $module => $features ) :
-			$featurelist = '';
-			$count = 1;
-			$total = count( $features );
-			foreach ( $features as $feature ) :
-				if ( $total === $count && 2 === $count ) :
-					$featurelist .= ' or ';
-				elseif ( $total === $count && $count > 2 ) :
-					$featurelist .= ', or ';
-				elseif ( 1 < $count ) :
-					$featurelist .= ', ';
-				endif;
-				$featurelist .= $feature;
-				$count++;
-			endforeach;
+			$featurelist = array();
+			foreach ( $features as $feature ) {
+				$featurelist[] = $feature;
+			}
+
+			if ( 2 === count( $featurelist) ) {
+				$featurelist  = implode( ' or ', $featurelist );
+			} elseif ( 1 < count( $featurelist ) ) {
+				$last_feature = array_pop( $featurelist );
+				$featurelist  = implode( ', ', $featurelist ) . ', or ' . $last_feature;
+			} else {
+				$featurelist  = implode( ', ', $featurelist );
+			}
+
 			$notice .= '<p>';
 			$notice .= sprintf(
 				__( 'To use %1$s, please activate the Jetpack plugin&rsquo;s %2$s.', 'textdomain' ),
@@ -296,12 +291,12 @@ class Theme_Plugin_Enhancements {
 
 		// Output notice HTML.
 		$allowed = array(
-			'p' => array(),
-	    'strong' => array(),
-	    'em'     => array(),
-	    'b'      => array(),
-	    'i'      => array(),
-	    'a'     => array( 'href' => array() ),
+			'p'      => array(),
+			'strong' => array(),
+			'em'     => array(),
+			'b'      => array(),
+			'i'      => array(),
+			'a'      => array( 'href' => array() ),
 		);
 		printf(
 			'<div id="message" class="notice notice-warning is-dismissible">%s</div>',
@@ -312,7 +307,7 @@ class Theme_Plugin_Enhancements {
 	/**
 	 * Helper function to return the URL for activating a plugin.
 	 *
-	 * @param var $slug Plugin slug; determines which plugin to activate.
+	 * @param string $slug Plugin slug; determines which plugin to activate.
 	 */
 	function plugin_activate_url( $slug ) {
 		// Find the path to the plugin.
@@ -338,11 +333,11 @@ class Theme_Plugin_Enhancements {
 	/**
 	 * Helper function to return the URL for installing a plugin.
 	 *
-	 * @param var $slug Plugin slug; determines which plugin to install.
+	 * @param string $slug Plugin slug; determines which plugin to install.
 	 */
 	function plugin_install_url( $slug ) {
 		/*
-		Include Plugin Install Administration API to get access to the
+		 * Include Plugin Install Administration API to get access to the
 		 * plugins_api() function
 		 */
 		include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
