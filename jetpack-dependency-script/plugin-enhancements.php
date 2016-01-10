@@ -271,9 +271,11 @@ class Theme_Plugin_Enhancements {
 				$featurelist[] = $feature;
 			}
 
-			if ( 1 < count( $featurelist ) ) {
+			if ( 2 === count( $featurelist) ) {
+				$featurelist  = implode( ' or ', $featurelist );
+			} elseif ( 1 < count( $featurelist ) ) {
 				$last_feature = array_pop( $featurelist );
-				$featurelist  = implode( ', ', $featurelist ) . ' or ' . $last_feature;
+				$featurelist  = implode( ', ', $featurelist ) . ', or ' . $last_feature;
 			} else {
 				$featurelist  = implode( ', ', $featurelist );
 			}
