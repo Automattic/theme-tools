@@ -20,7 +20,7 @@ To edit the file, run `touch ~/.profile; open -e ~/.profile` – Then add the fo
     # Get Selectors tool – https://github.com/Automattic/theme-tools
     alias getselectors='node ~/Library/getselectors/getselectors.js'
     
-After saving the file, the `getselectors` command will be readily available on new Terminal Tabs and Windows. Enjoy!
+After saving the file, run `source ~/.profile`. The `getselectors` command should now be readily available. Enjoy!
 
 
 ### Standalone Install
