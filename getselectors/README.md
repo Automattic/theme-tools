@@ -39,8 +39,8 @@ To update the tool, run the updater script from _outside_ the installation direc
 
 ### Usage:
 
-    Usage: getselectors.js [options] <stylesheet> <color>
-           getselectors.js --fonts <stylesheet>
+    Usage: node getselectors.js [options] <stylesheet> <color>
+           node getselectors.js --fonts <stylesheet>
 
     Options:
 
