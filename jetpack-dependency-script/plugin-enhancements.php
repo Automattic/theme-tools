@@ -10,7 +10,7 @@
  *
  * @package      TEXTDOMAIN
  * @author       Automattic
- * @copyright    2015
+ * @copyright    2016
  */
 
 class Theme_Plugin_Enhancements {
