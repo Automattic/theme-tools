@@ -125,6 +125,15 @@ class Theme_Plugin_Enhancements {
 			);
 		endif;
 
+		if ( current_theme_supports( 'jetpack-social-menu' ) ) :
+			$dependencies['social-menu'] = array(
+				'name' => 'Social Menu',
+				'slug' => 'jetpack-social-menu',
+				'url'  => '',
+				'module' => 'none',
+			);
+		endif;
+
 		if ( current_theme_supports( 'nova_menu_item' ) ) :
 			$dependencies['menus'] = array(
 				'name' => 'Menus',
