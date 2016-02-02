@@ -16,7 +16,7 @@ For better usage, a command line alias can also be created:
 
 The script works with a list of theme directories provided in a text file, which it will use when adding or removing tags from a group of themes. You can specify the list file using the `--list` option.
 
-To query all the themes in a given directory, you can use the `--show <tag>` and `--without <tag>` options to display the themes using the specified tag.
+To query all the themes in a given directory, you can use the `--show <tag>` and `--without <tag>` options to display the themes using (or not using) the specified tag.
 
 > When <u>adding</u> tags, only themes that _do not have the tag_ are updated.<br/>
 > When <u>removing</u> tags, only themes that _have the tag_ are updated.
