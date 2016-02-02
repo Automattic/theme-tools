@@ -1,0 +1,19 @@
+{
+  "name": "theme-tags",
+  "description": "WordPress theme tags modifier",
+  "author": "Automattic <themes@wordpress.com>",
+  "version": "1.0.0",
+  "private": "true",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Automattic/theme-tools/"
+  },
+  "engines": {
+    "node": ">=0.10.0",
+    "npm": ">=1.1.0"
+  },
+  "dependencies": {
+    "colors": "^1.1.2",
+    "minimist": "^1.2.0"
+  }
+}

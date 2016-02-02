@@ -9,4 +9,5 @@ What's here (so far):
 - **org-submitter**: A script that downloads a theme from WordPress.com and packages it up for submission to the WordPress.org theme directory.
 - **jetpack-dependency-script**: Checks for Jetpack dependencies within the active theme, and, prompts user to download and install Jetpack accordingly.
 - **getselectors**: Returns a list of selectors using the given color. Can also print font selectors.
+- **theme-tags**: Queries and updates the style.css Tags present in a group of WordPress themes.
 - **theme-name-changer**: A plugin to change the site title ("blogname" option) to the active theme name, version, and author.
