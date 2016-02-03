@@ -8,10 +8,6 @@ Dependencies can be installed using `npm install`
 
 You can call this script using `node` directly.
 
-For better usage, a command line alias can also be created:
-
-```alias theme-tags='node <path>/theme-tools/theme-tags/theme-tags.js'```
-
 ## Usage Notes
 
 The script works with a list of theme directories provided in a text file, which it will use when adding or removing tags from a group of themes. You can specify the list file using the `--list` option.
