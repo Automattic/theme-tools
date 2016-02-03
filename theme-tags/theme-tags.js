@@ -28,7 +28,8 @@ function main() {
 	});
 
 	if ( 1 === opts._.length ) {
-		var dir = opts._[0];
+		var dir = opts._[0].replace( /\/+$/, '' );
+		var where = opts.list ? util.format( '%s/ (%s)', dir, opts.list ) : util.format( '%s/', dir );
 		var instance = new ThemeTags( dir, opts );
 	} else {
 		printUsage( 0 );
@@ -43,13 +44,25 @@ function main() {
 		checkList( opts );
 		instance.removeTag( opts.remove );
 	} else if ( opts.show ) {
-		console.log( '\nShowing themes %s the [%s] tag:\n', 'with'.underline, opts.show.bold );
-		instance.getThemesWithTag( opts.show ).map( printThemeList );
-		console.log( '' );
+		if ( opts.list ) checkList( opts );
+		var themes = instance.getThemesWithTag( opts.show );
+		if ( themes.length ) {
+			console.log( '\nShowing themes %s the [%s] tag in %s:\n', 'with'.underline, opts.show.bold, where.bold );
+			themes.map( printThemeList );
+			console.log( '' );
+		} else {
+			console.log( '\nNo themes found with the [%s] tag in %s\n', opts.show.bold, where.bold );
+		}
 	} else if ( opts.without ) {
-		console.log( '\nShowing themes %s the [%s] tag:\n', 'without'.underline, opts.without.bold );
-		instance.getThemesWithoutTag( opts.without ).map( printThemeList );
-		console.log( '' );
+		if ( opts.list ) checkList( opts );
+		var themes = instance.getThemesWithoutTag( opts.without );
+		if ( themes.length ) {
+			console.log( '\nShowing themes %s the [%s] tag in %s:\n', 'without'.underline, opts.without.bold, where.bold );
+			themes.map( printThemeList );
+			console.log( '' );
+		} else {
+			console.log( '\nNo themes found without the [%s] tag in %s\n', opts.without.bold, where.bold );
+		}
 	} else {
 		printUsage( 1 );
 	}
@@ -95,28 +108,10 @@ function checkList( opts ) {
 			err = util.format( 'List file does not exist: %s', opts.list );
 		}
 	} else {
-		err = 'Themes slugs list not specified';
+		err = 'Themes slugs list not specified.';
 	}
 	if ( err ) {
 		console.log( '\n%s: %s\n', 'Error'.bold, err );
-		process.exit( 1 );
-	}
-}
-
-function getThemesInList( file, data, dir ) {
-	var themes = fs.readFileSync( file, 'utf8' ).trim().split( /\s*\n+\s*/g );
-	var missing = themes.reduce( function( acc, theme ) {
-		if ( ! data.hasOwnProperty( theme ) ) {
-			acc.push( theme );
-		}
-		return acc;
-	}, [] );
-	if ( 0 === missing.length ) {
-		return themes;
-	} else {
-		console.log( '\nThe following themes are %s in %s/:\n', 'not found'.underline, dir );
-		missing.map( printThemeList );
-		console.log( '\nTo proceed, update the list in %s\n', file.bold );
 		process.exit( 1 );
 	}
 }
@@ -149,25 +144,45 @@ function ThemeTags( path, opts ) {
 	return {
 		
 		getThemesWithTag: function( tag ) {
-			return Object.keys( data ).reduce( function( out, slug ) {
+			var themes = opts.list ? this.getThemesInList() : Object.keys( data );
+			return themes.reduce( function( out, slug ) {
 				var tags = data[ slug ];
 				if ( tags.indexOf( tag ) >= 0 ) {
 					out.push( slug );
 				}
 				return out;
-			}, []);
+			}, [] );
 		},
 		
 		getThemesWithoutTag: function( tag ) {
-			return Object.keys( data ).reduce( function( out, slug ) {
+			var themes = opts.list ? this.getThemesInList() : Object.keys( data );
+			return themes.reduce( function( out, slug ) {
 				var tags = data[ slug ];
 				if ( -1 === tags.indexOf( tag ) ) {
 					out.push( slug );
 				}
 				return out;
-			}, []);
+			}, [] );
 		},
 		
+		getThemesInList: function( ) {
+			var themes = fs.readFileSync( opts.list, 'utf8' ).trim().split( /\s*\n+\s*/g );
+			var missing = themes.reduce( function( acc, theme ) {
+				if ( ! data.hasOwnProperty( theme ) ) {
+					acc.push( theme );
+				}
+				return acc;
+			}, [] );
+			if ( 0 === missing.length ) {
+				return themes;
+			} else {
+				console.log( '\nThe following themes are %s in %s/:\n', 'not found'.underline, dir );
+				missing.map( printThemeList );
+				console.log( '\nTo proceed, update the list in %s\n', file.bold );
+				process.exit( 1 );
+			}
+		},
+
 		updateThemeTags: function( slug, tags ) {
 			if ( opts.commit ) {
 				var file = util.format( '%s/%s/style.css', path, slug );
@@ -183,7 +198,7 @@ function ThemeTags( path, opts ) {
 		},
 		
 		removeTag: function( tag ) {
-			var include = getThemesInList( opts.list, data, path );
+			var include = this.getThemesInList();
 			var themes = this.getThemesWithTag( tag ).filter( function( theme ) {
 				return include.indexOf( theme ) >= 0;
 			} );
@@ -210,7 +225,7 @@ function ThemeTags( path, opts ) {
 		},
 		
 		addTag: function( tag ) {
-			var include = getThemesInList( opts.list, data, path );
+			var include = this.getThemesInList();
 			var themes = this.getThemesWithoutTag( tag ).filter( function( theme ) {
 				return include.indexOf( theme ) >= 0;
 			} );
