@@ -212,9 +212,9 @@ function ThemeTags( path, opts ) {
 			} );
 			if ( themes.length > 0 ) {
 				if ( opts.commit ) {
-					console.log( '\n%s the %s tag:\n', 'Removing'.underline, tag.bold );
+					console.log( '\n%s the [%s] tag:\n', 'Removing'.underline, tag.bold );
 				} else {
-					console.log( '\nWill %s the %s tag from the following themes:\n', 'remove'.underline, tag.bold );
+					console.log( '\nWill %s the [%s] tag from the following themes:\n', 'remove'.underline, tag.bold );
 				}
 				themes.forEach( function( theme ) {
 					var tags = data[theme].filter( function( t ) {
@@ -239,9 +239,9 @@ function ThemeTags( path, opts ) {
 			} );
 			if ( themes.length > 0 ) {
 				if ( opts.commit ) {
-					console.log( '\n%s the %s tag:\n', 'Adding'.underline, tag.bold );
+					console.log( '\n%s the [%s] tag:\n', 'Adding'.underline, tag.bold );
 				} else {
-					console.log( '\nWill %s the %s tag to the following themes:\n', 'add'.underline, tag.bold );
+					console.log( '\nWill %s the [%s] tag to the following themes:\n', 'add'.underline, tag.bold );
 				}
 				themes.forEach( function( theme ) {
 					var tags = [ tag ].concat( data[ theme ] ).sort();
