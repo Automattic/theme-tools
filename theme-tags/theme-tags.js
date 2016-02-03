@@ -122,6 +122,14 @@ function showCommitMessage() {
 
 function ThemeTags( path, opts ) {
 	
+	if ( ! fs.existsSync( path ) ) {
+		console.log( '\n%s: Directory does not exist: %s\n', 'Error'.bold, path );
+		process.exit( 1 );
+	} else if ( ! fs.statSync( path ).isDirectory() ) {
+		console.log( '\n%s: Not a directory: %s\n', 'Error'.bold, path );
+		process.exit( 1 );
+	}
+	
 	var tagsRegex = /Tags\s*:\s*([^\n]+)\n/;
 
 	var data = fs.readdirSync( path ).filter( function( dir ) {
