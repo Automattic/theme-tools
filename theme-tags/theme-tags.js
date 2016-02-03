@@ -38,19 +38,15 @@ function main() {
 		printUsage( 0 );
 	} else if ( opts.add ) {
 		checkList( opts );
-		checkArgs( opts );
 		instance.addTag( opts.add );
 	} else if ( opts.remove ) {
 		checkList( opts );
-		checkArgs( opts );
 		instance.removeTag( opts.remove );
 	} else if ( opts.show ) {
-		checkArgs( opts );
 		console.log( '\nShowing themes %s the [%s] tag:\n', 'with'.underline, opts.show.bold );
 		instance.getThemesWithTag( opts.show ).map( printThemeList );
 		console.log( '' );
 	} else if ( opts.without ) {
-		checkArgs( opts );
 		console.log( '\nShowing themes %s the [%s] tag:\n', 'without'.underline, opts.without.bold );
 		instance.getThemesWithoutTag( opts.without ).map( printThemeList );
 		console.log( '' );
@@ -123,11 +119,6 @@ function getThemesInList( file, data, dir ) {
 		console.log( '\nTo proceed, update the list in %s\n', file.bold );
 		process.exit( 1 );
 	}
-}
-
-function checkArgs( args ) {
-	args = args instanceof Array ? args : [ args ];
-	
 }
 
 function showCommitMessage() {
