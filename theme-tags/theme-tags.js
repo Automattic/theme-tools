@@ -55,7 +55,7 @@ function main() {
 		}
 	} else if ( opts.without ) {
 		if ( opts.list ) checkList( opts );
-		var themes = instance.getThemesWithoutTag( opts.without );
+		themes = instance.getThemesWithoutTag( opts.without );
 		if ( themes.length ) {
 			console.log( '\nShowing themes %s the [%s] tag in %s:\n', 'without'.underline, opts.without.bold, where.bold );
 			themes.map( printThemeList );
@@ -173,7 +173,7 @@ function ThemeTags( path, opts ) {
 			}, [] );
 		},
 		
-		getThemesInList: function( ) {
+		getThemesInList: function() {
 			var themes = fs.readFileSync( opts.list, 'utf8' ).trim().split( /\s*\n+\s*/g );
 			var missing = themes.reduce( function( acc, theme ) {
 				if ( ! data.hasOwnProperty( theme ) ) {
@@ -184,9 +184,9 @@ function ThemeTags( path, opts ) {
 			if ( 0 === missing.length ) {
 				return themes;
 			} else {
-				console.log( '\nThe following themes are %s in %s/:\n', 'not found'.underline, dir );
+				console.log( '\nThe following themes are %s in %s/:\n', 'not found'.underline, path );
 				missing.map( printThemeList );
-				console.log( '\nTo proceed, update the list in %s\n', file.bold );
+				console.log( '\nTo proceed, update the list in %s\n', opts.list.bold );
 				process.exit( 1 );
 			}
 		},
