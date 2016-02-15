@@ -62,7 +62,7 @@ function main() {
 }
 
 function printUsage() {
-  var cmd = path.basename( __filename );
+  var cmd = path.basename( __filename ).replace( '.js', '' );
   console.log( '\nUsage: %s %s', cmd.bold, '[options] <stylesheet> <color>'.gray );
   console.log( '       %s %s\n', cmd.bold, '--fonts <stylesheet>'.gray );
   console.log( 'Options:\n' );
