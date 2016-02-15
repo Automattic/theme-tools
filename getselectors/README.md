@@ -39,8 +39,8 @@ To update the tool, run the updater script from _outside_ the installation direc
 
 ### Usage:
 
-    Usage: node getselectors.js [options] <stylesheet> <color>
-           node getselectors.js --fonts <stylesheet>
+    Usage: getselectors [options] <stylesheet> <color>
+           getselectors --fonts <stylesheet>
 
     Options:
 
@@ -75,3 +75,24 @@ Any [named color](http://www.w3.org/TR/css3-color/#svg-color) can also be used:
 You can print all the selectors using a given font by using `--font`:
 
     node getselectors.js --fonts style.css
+
+&nbsp;
+
+## csspalette.js
+
+Generates a color palette from a stylesheet with the colors used.
+
+### Usage:
+
+	Usage: csspalette <stylesheet> [options]
+	       csspalette <stylesheet> --title "TITLE"
+	       csspalette <stylesheet> --outfile file.html
+	Options:
+
+	-t, --title	  Sets generated palette title
+	-o, --outfile	  File to save the generated HTML output
+	-h, --help	  Display help information
+
+### Color Support
+
+The tool detects `hex`, `rgb`, `rgba`, `hsl`, `hsla` and [named colors](http://www.w3.org/TR/css3-color/#svg-color).
