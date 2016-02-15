@@ -1,19 +1,13 @@
 <?php
 /**
- * Plugin Name:  Theme Plugin Enhancements
- * Plugin URI:	 https://github.com/Automattic/theme-tools/
- * Description:  Inform a theme user of plugins that will extend their theme's functionality.
- * Version:      0.1
- * Author:       Automattic
- * Author URI:   http://automattic.com
- * License:      GPLv2 or later
+ * Inform a theme user of plugins that will extend their theme's functionality.
  *
- * @package      TEXTDOMAIN
- * @author       Automattic
- * @copyright    2016
+ * @link https://github.com/Automattic/theme-tools/
+ *
+ * @package TEXTDOMAIN
  */
 
-class Theme_Plugin_Enhancements {
+class TEXTDOMAIN_Theme_Plugin_Enhancements {
 
 	/**
 	 * @var array; holds the information of the plugins declared as enhancements
@@ -32,7 +26,7 @@ class Theme_Plugin_Enhancements {
 		static $instance = false;
 
 		if ( ! $instance ) {
-			$instance = new Theme_Plugin_Enhancements;
+			$instance = new TEXTDOMAIN_Theme_Plugin_Enhancements;
 		}
 
 		return $instance;
@@ -363,4 +357,4 @@ class Theme_Plugin_Enhancements {
 		}
 	}
 }
-add_action( 'admin_head', array( 'Theme_Plugin_Enhancements', 'init' ) );
+add_action( 'admin_head', array( 'TEXTDOMAIN_Theme_Plugin_Enhancements', 'init' ) );
