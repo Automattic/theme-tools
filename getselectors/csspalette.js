@@ -77,8 +77,7 @@ function run( file, title ) {
         rulesHandler( r, colors );
       } );
     } );
-    var outfile, html = TEMPLATE;
-    list = colors.getList();
+    var outfile, list = colors.getList(), html = TEMPLATE;
     if ( list.length > 0 ) {
       list = list.map( function( c ) {
         return util.format( '\t\t<li style="background-color: %s;"><span>%s</span></li>', c, c );
@@ -160,8 +159,11 @@ function Colors() {
 
     getColor: function( s ) {
       if ( regex.hex.test( s ) ) {
-        var m = s.match( regex.hex );
-        return util.format( '#%s', m[1] ).toLowerCase();
+        var m = s.match( regex.hex ), c = m[1];
+        if ( 3 === c.length ) {
+          c = util.format( '%s%s%s%s%s%s', c[0], c[0], c[1], c[1], c[2], c[2] );
+        }
+        return util.format( '#%s', c ).toLowerCase();
       } else if ( regex.special.test( s ) ) {
         m = s.match( regex.special );
         return util.format( '%s%s', m[1], m[2] );
