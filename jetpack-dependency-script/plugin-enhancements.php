@@ -103,7 +103,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 
 		if ( current_theme_supports( 'site-logo' ) ) :
 			$dependencies['logo'] = array(
-				'name' => 'Site Logo',
+				'name' => __( 'Site Logo', 'textdomain' ),
 				'slug' => 'site-logo',
 				'url'  => '',
 				'module' => 'none',
@@ -112,7 +112,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 
 		if ( current_theme_supports( 'featured-content' ) ) :
 			$dependencies['featured-content'] = array(
-				'name' => 'Featured Content',
+				'name' => __( 'Featured Content', 'textdomain' ),
 				'slug' => 'featured-content',
 				'url'  => '',
 				'module' => 'none',
@@ -121,7 +121,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 
 		if ( current_theme_supports( 'jetpack-social-menu' ) ) :
 			$dependencies['social-menu'] = array(
-				'name' => 'Social Menu',
+				'name' => __( 'Social Menu', 'textdomain' ),
 				'slug' => 'jetpack-social-menu',
 				'url'  => '',
 				'module' => 'none',
@@ -130,7 +130,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 
 		if ( current_theme_supports( 'nova_menu_item' ) ) :
 			$dependencies['menus'] = array(
-				'name' => 'Menus',
+				'name' => __( 'Menus', 'textdomain' ),
 				'slug' => 'nova_menu_item',
 				'url'  => '',
 				'module' => 'custom-content-types',
@@ -139,7 +139,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 
 		if ( current_theme_supports( 'jetpack-comic' ) ) :
 			$dependencies['comics'] = array(
-				'name' => 'Comics',
+				'name' => __( 'Comics', 'textdomain' ),
 				'slug' => 'jetpack-comic',
 				'url'  => '',
 				'module' => 'custom-content-types',
@@ -148,7 +148,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 
 		if ( current_theme_supports( 'jetpack-testimonial' ) ) :
 			$dependencies['testimonials'] = array(
-				'name' => 'Testimonials',
+				'name' => __( 'Testimonials', 'textdomain' ),
 				'slug' => 'jetpack-testimonial',
 				'url'  => '',
 				'module' => 'custom-content-types',
@@ -157,7 +157,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 
 		if ( current_theme_supports( 'jetpack-portfolio' ) ) :
 			$dependencies['portfolios'] = array(
-				'name' => 'Portfolios',
+				'name' => __( 'Portfolios', 'textdomain' ),
 				'slug' => 'jetpack-portfolio',
 				'url'  => '',
 				'module' => 'custom-content-types',
