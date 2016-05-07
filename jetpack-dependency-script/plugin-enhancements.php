@@ -79,8 +79,8 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 				'slug'    => 'jetpack',
 				'name'    => 'Jetpack by WordPress.com',
 				'message' => sprintf(
-					__( 'The %1$s is required to use some of this theme&rsquo;s features, including: ', 'textdomain' ),
-					'<strong>' . __( 'Jetpack plugin', 'textdomain' ) . '</strong>' ),
+					esc_html__( 'The %1$s is required to use some of this theme&rsquo;s features, including: ', 'textdomain' ),
+					'<strong>' . esc_html__( 'Jetpack plugin', 'textdomain' ) . '</strong>' ),
 				'modules' => rtrim( $dependency_list, ', ' ) . '.',
 			),
 		);
@@ -175,8 +175,8 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 	 */
 	function get_module_name( $module ) {
 		$module_names = array(
-			'none'                 => __( 'no specific module needed', 'textdomain' ),
-			'custom-content-types' => __( 'Custom Content Types module', 'textdomain' ),
+			'none'                 => esc_html__( 'no specific module needed', 'textdomain' ),
+			'custom-content-types' => esc_html__( 'Custom Content Types module', 'textdomain' ),
 		);
 		return $module_names[ $module ];
 	}
@@ -248,9 +248,9 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 			if ( 'to-activate' === $plugin['status'] ) {
 				$activate_url = $this->plugin_activate_url( $plugin['slug'] );
 				$notice .= sprintf(
-					__( ' Please activate %1$s. %2$s', 'textdomain' ),
+					esc_html__( ' Please activate %1$s. %2$s', 'textdomain' ),
 					esc_html( $plugin['name'] ),
-					( $activate_url ) ? '<a href="' . $activate_url . '">' . __( 'Activate', 'textdomain' ) . '</a>' : ''
+					( $activate_url ) ? '<a href="' . $activate_url . '">' . esc_html__( 'Activate', 'textdomain' ) . '</a>' : ''
 				);
 			}
 
@@ -258,9 +258,9 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 			if ( 'to-install' === $plugin['status'] ) {
 				$install_url = $this->plugin_install_url( $plugin['slug'] );
 				$notice .= sprintf(
-					__( ' Please install %1$s. %2$s', 'textdomain' ),
+					esc_html__( ' Please install %1$s. %2$s', 'textdomain' ),
 					esc_html( $plugin['name'] ),
-					( $install_url ) ? '<a href="' . $install_url . '">' . __( 'Install', 'textdomain' ) . '</a>' : ''
+					( $install_url ) ? '<a href="' . $install_url . '">' . esc_html__( 'Install', 'textdomain' ) . '</a>' : ''
 				);
 			}
 
@@ -285,7 +285,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 
 			$notice .= '<p>';
 			$notice .= sprintf(
-				__( 'To use %1$s, please activate the Jetpack plugin&rsquo;s %2$s.', 'textdomain' ),
+				esc_html__( 'To use %1$s, please activate the Jetpack plugin&rsquo;s %2$s.', 'textdomain' ),
 				esc_html( $featurelist ),
 				'<strong>' . esc_html( $this->get_module_name( $module ) ) . '</strong>'
 			);
