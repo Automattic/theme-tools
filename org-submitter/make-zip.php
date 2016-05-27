@@ -154,7 +154,7 @@ delete_file( $theme_stylesheet );
 
 // Get a list of tags for the .org version of the theme.
 function get_theme_tags( $theme, $stylesheet ) {
-	$org_allowed_tags = array( 'black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'silver', 'tan', 'white', 'yellow', 'dark', 'light', 'fixed-layout', 'fluid-layout', 'responsive-layout', 'one-column', 'two-columns', 'three-columns', 'four-columns', 'left-sidebar', 'right-sidebar', 'accessibility-ready', 'blavatar', 'buddypress', 'custom-background', 'custom-colors', 'custom-header', 'custom-menu', 'editor-style', 'featured-image-header', 'featured-images', 'flexible-header', 'front-page-posting', 'full-width-template', 'microformats', 'post-formats', 'rtl-language-support', 'sticky-post', 'theme-options', 'threaded-comments', 'translation-ready', 'holiday', 'photoblogging', 'seasonal' );
+	$org_allowed_tags = array( 'one-column', 'two-columns', 'three-columns', 'four-columns', 'left-sidebar', 'right-sidebar', 'accessibility-ready', 'buddypress', 'custom-background', 'custom-colors', 'custom-header', 'custom-menu', 'editor-style', 'featured-image-header', 'featured-images', 'flexible-header', 'front-page-posting', 'full-width-template', 'microformats', 'post-formats', 'rtl-language-support', 'sticky-post', 'theme-options', 'threaded-comments', 'translation-ready', 'holiday', 'blog', 'e-commerce', 'education', 'entertainment', 'food-and-drink', 'holiday', 'news', 'photography', 'portfolio', 'footer-widgets', 'grid-layout' );
 
 	// Get our original tag string.
 	$pattern = '/^Tags:\s?[a-z,\s-]+$/mi';
