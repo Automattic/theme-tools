@@ -187,6 +187,7 @@ $new_stylesheet_URI = $theme_dir . 'style.css';
 $new_stylesheet = read_file( $new_stylesheet_URI );
 $functions_URI = $theme_dir . 'functions.php';
 $updater_URI = $theme_dir . 'inc/updater.php';
+$headstart_dir = $theme_dir . 'inc/headstart/';
 $pot_URI = $theme_dir . 'languages/'.$theme.'.pot';
 $footer_URI = $theme_dir . 'footer.php';
 
@@ -293,6 +294,7 @@ endif;
 $new_functions = remove_updater( $functions_URI );
 write_file( $functions_URI, $new_functions );
 delete_file( $updater_URI );
+delete_directory( $headstart_dir );
 
 // Edit .pot file.
 $new_pot = edit_pot( $pot_URI );
