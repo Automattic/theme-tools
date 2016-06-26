@@ -103,7 +103,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 
 		if ( current_theme_supports( 'site-logo' ) ) :
 			$dependencies['logo'] = array(
-				'name' => __( 'Site Logo', 'textdomain' ),
+				'name' => esc_html__( 'Site Logo', 'textdomain' ),
 				'slug' => 'site-logo',
 				'url'  => '',
 				'module' => 'none',
@@ -112,7 +112,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 
 		if ( current_theme_supports( 'featured-content' ) ) :
 			$dependencies['featured-content'] = array(
-				'name' => __( 'Featured Content', 'textdomain' ),
+				'name' => esc_html__( 'Featured Content', 'textdomain' ),
 				'slug' => 'featured-content',
 				'url'  => '',
 				'module' => 'none',
@@ -121,7 +121,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 
 		if ( current_theme_supports( 'jetpack-social-menu' ) ) :
 			$dependencies['social-menu'] = array(
-				'name' => __( 'Social Menu', 'textdomain' ),
+				'name' => esc_html__( 'Social Menu', 'textdomain' ),
 				'slug' => 'jetpack-social-menu',
 				'url'  => '',
 				'module' => 'none',
@@ -130,7 +130,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 
 		if ( current_theme_supports( 'nova_menu_item' ) ) :
 			$dependencies['menus'] = array(
-				'name' => __( 'Menus', 'textdomain' ),
+				'name' => esc_html__( 'Menus', 'textdomain' ),
 				'slug' => 'nova_menu_item',
 				'url'  => '',
 				'module' => 'custom-content-types',
@@ -139,7 +139,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 
 		if ( current_theme_supports( 'jetpack-comic' ) ) :
 			$dependencies['comics'] = array(
-				'name' => __( 'Comics', 'textdomain' ),
+				'name' => esc_html__( 'Comics', 'textdomain' ),
 				'slug' => 'jetpack-comic',
 				'url'  => '',
 				'module' => 'custom-content-types',
@@ -148,7 +148,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 
 		if ( current_theme_supports( 'jetpack-testimonial' ) ) :
 			$dependencies['testimonials'] = array(
-				'name' => __( 'Testimonials', 'textdomain' ),
+				'name' => esc_html__( 'Testimonials', 'textdomain' ),
 				'slug' => 'jetpack-testimonial',
 				'url'  => '',
 				'module' => 'custom-content-types',
@@ -157,7 +157,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 
 		if ( current_theme_supports( 'jetpack-portfolio' ) ) :
 			$dependencies['portfolios'] = array(
-				'name' => __( 'Portfolios', 'textdomain' ),
+				'name' => esc_html__( 'Portfolios', 'textdomain' ),
 				'slug' => 'jetpack-portfolio',
 				'url'  => '',
 				'module' => 'custom-content-types',
