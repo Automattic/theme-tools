@@ -1,5 +1,5 @@
 #: inc/plugin-enhancements.php:92
-msgid "The %1$s is required to use some of this theme&rsquo;s features, including: "
+msgid "The %1$s is needed to use some of this theme&rsquo;s features, including: "
 msgstr ""
 
 #: inc/plugin-enhancements.php:93

@@ -57,7 +57,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 		if ( empty( $this->dependencies ) )
 			return;
 
-		// Otherwise, build an array to list all the required dependencies and modules.
+		// Otherwise, build an array to list all the needed dependencies and modules.
 		$dependency_list = '';
 		$this->modules = array();
 
@@ -73,13 +73,13 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 			$dependency_list .= $dependency['name'] . ' (' . $this->get_module_name( $dependency['module'] ) . '), ';
 		endforeach;
 
-		// Define our Jetpack plugin as a required plugin.
+		// Define our Jetpack plugin as a needed plugin.
 		$this->plugins = array(
 			array(
 				'slug'    => 'jetpack',
 				'name'    => 'Jetpack by WordPress.com',
 				'message' => sprintf(
-					esc_html__( 'The %1$s is required to use some of this theme&rsquo;s features, including: ', 'textdomain' ),
+					esc_html__( 'The %1$s is needed to use some of this theme&rsquo;s features, including: ', 'textdomain' ),
 					'<strong>' . esc_html__( 'Jetpack plugin', 'textdomain' ) . '</strong>' ),
 				'modules' => rtrim( $dependency_list, ', ' ) . '.',
 			),
