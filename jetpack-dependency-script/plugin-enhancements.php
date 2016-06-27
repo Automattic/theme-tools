@@ -57,7 +57,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 		if ( empty( $this->dependencies ) )
 			return;
 
-		// Otherwise, build an array to list all the needed dependencies and modules.
+		// Otherwise, build an array to list all the necessary dependencies and modules.
 		$dependency_list = '';
 		$this->modules = array();
 
@@ -73,19 +73,19 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 			$dependency_list .= $dependency['name'] . ' (' . $this->get_module_name( $dependency['module'] ) . '), ';
 		endforeach;
 
-		// Define our Jetpack plugin as a needed plugin.
+		// Define our Jetpack plugin as a necessary plugin.
 		$this->plugins = array(
 			array(
 				'slug'    => 'jetpack',
 				'name'    => 'Jetpack by WordPress.com',
 				'message' => sprintf(
-					esc_html__( 'The %1$s is needed to use some of this theme&rsquo;s features, including: ', 'textdomain' ),
+					esc_html__( 'The %1$s is necessary to use some of this theme&rsquo;s features, including: ', 'textdomain' ),
 					'<strong>' . esc_html__( 'Jetpack plugin', 'textdomain' ) . '</strong>' ),
 				'modules' => rtrim( $dependency_list, ', ' ) . '.',
 			),
 		);
 
-		// Set the status of each of these enhancements and determine if a notice is needed.
+		// Set the status of each of these enhancements and determine if a notice is necessary.
 		$this->set_plugin_status();
 		$this->set_module_status();
 
@@ -183,7 +183,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 
 	/**
 	 * Determine the status of each of the plugins declared as a dependency
-	 * by the theme and whether an admin notice is needed or not.
+	 * by the theme and whether an admin notice is necessary or not.
 	 */
 	function set_plugin_status() {
 		// Get the names of the installed plugins.
