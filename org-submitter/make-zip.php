@@ -294,7 +294,10 @@ endif;
 $new_functions = remove_updater( $functions_URI );
 write_file( $functions_URI, $new_functions );
 delete_file( $updater_URI );
-delete_directory( $headstart_dir );
+// Not all themes have Headstart annotations, so let's check if the dir exists first.
+if ( is_dir( $headstart_dir ) ) {
+    delete_directory( $headstart_dir );
+}
 
 // Edit .pot file.
 $new_pot = edit_pot( $pot_URI );
