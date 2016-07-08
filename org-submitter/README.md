@@ -31,3 +31,7 @@ Simple! Just pass an argument to the command:
 or
 
 `http://localhost:8888/folder/make-zip.php?theme=[theme-slug]&jetpack=true`
+
+# IMPORTANT note about child themes
+
+**Do not** add the script to a chlid theme if it's already in the parent. 
