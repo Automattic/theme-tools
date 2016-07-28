@@ -281,6 +281,13 @@ if ( true === $jetpack_dependency_script ) :
 	// Include it from within functions.php.
 	file_put_contents( $functions_URI, $include_jetpack_dependency, FILE_APPEND );
 
+	// Add plugin enhancements.js
+	$plugin_enhancements_js_URI = $theme_dir . 'inc/plugin-enhancements.js';
+	download_file( 'https://raw.githubusercontent.com/Automattic/theme-tools/master/jetpack-dependency-script/plugin-enhancements.js', $plugin_enhancements_js_URI );
+	$plugin_enhancements_js_content = read_file( $plugin_enhancements_js_URI );
+	$plugin_enhancements_js_content = replace_text_domain( $theme, $plugin_enhancements_js_content );
+	write_file( $plugin_enhancements_js_URI, $plugin_enhancements_js_content );
+
 	// Add extra strings to our .po file
 	$pot_URI = $theme_dir . '/languages/' . $theme . '.pot';
 	$extra_pot_URI = $theme_dir . '/languages/plugin-enhancements.php';
