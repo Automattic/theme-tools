@@ -117,11 +117,11 @@ function checkList( opts ) {
 }
 
 function showCommitMessage() {
-	console.log( '\nThis is an overview of what will be done.\nTo commit the changes to disk, use %s\n', '--commit'.bold );
+	console.log( '\nThis is an overview of what will be done.\nTo confirm the changes to disk, use %s\n', '--confirm'.bold );
 }
 
 function ThemeTags( path, opts ) {
-	
+
 	if ( ! fs.existsSync( path ) ) {
 		console.log( '\n%s: Directory does not exist: %s\n', 'Error'.bold, path );
 		process.exit( 1 );
@@ -129,7 +129,7 @@ function ThemeTags( path, opts ) {
 		console.log( '\n%s: Not a directory: %s\n', 'Error'.bold, path );
 		process.exit( 1 );
 	}
-	
+
 	var tagsRegex = /Tags\s*:\s*([^\n]+)\n/;
 
 	var data = fs.readdirSync( path ).filter( function( dir ) {
@@ -143,14 +143,14 @@ function ThemeTags( path, opts ) {
 		}
 		return state;
 	}, {});
-	
+
 	if ( 0 === Object.keys( data ).length ) {
 		console.log( '\nNo themes found in %s\n', path );
 		process.exit( 0 );
 	}
-	
+
 	return {
-		
+
 		getThemesWithTag: function( tag ) {
 			var themes = opts.list ? this.getThemesInList() : Object.keys( data );
 			return themes.reduce( function( out, slug ) {
@@ -161,7 +161,7 @@ function ThemeTags( path, opts ) {
 				return out;
 			}, [] );
 		},
-		
+
 		getThemesWithoutTag: function( tag ) {
 			var themes = opts.list ? this.getThemesInList() : Object.keys( data );
 			return themes.reduce( function( out, slug ) {
@@ -172,7 +172,7 @@ function ThemeTags( path, opts ) {
 				return out;
 			}, [] );
 		},
-		
+
 		getThemesInList: function() {
 			var themes = fs.readFileSync( opts.list, 'utf8' ).trim().split( /\s*\n+\s*/g );
 			var missing = themes.reduce( function( acc, theme ) {
@@ -192,7 +192,7 @@ function ThemeTags( path, opts ) {
 		},
 
 		updateThemeTags: function( slug, tags ) {
-			if ( opts.commit ) {
+			if ( opts.confirm ) {
 				var file = util.format( '%s/%s/style.css', path, slug );
 				var css = fs.readFileSync( file, 'utf8' );
 				if ( tagsRegex.test( css ) ) {
@@ -204,14 +204,14 @@ function ThemeTags( path, opts ) {
 				printThemeList( slug );
 			}
 		},
-		
+
 		removeTag: function( tag ) {
 			var include = this.getThemesInList();
 			var themes = this.getThemesWithTag( tag ).filter( function( theme ) {
 				return include.indexOf( theme ) >= 0;
 			} );
 			if ( themes.length > 0 ) {
-				if ( opts.commit ) {
+				if ( opts.confirm ) {
 					console.log( '\n%s the [%s] tag:\n', 'Removing'.underline, tag.bold );
 				} else {
 					console.log( '\nWill %s the [%s] tag from the following themes:\n', 'remove'.underline, tag.bold );
@@ -222,7 +222,7 @@ function ThemeTags( path, opts ) {
 					} );
 					this.updateThemeTags( theme, tags );
 				}, this );
-				if ( opts.commit ) {
+				if ( opts.confirm ) {
 					console.log( '\nDone!\n' );
 				} else {
 					showCommitMessage();
@@ -231,14 +231,14 @@ function ThemeTags( path, opts ) {
 				console.log( '\nNo themes found with the [%s] tag.\n', tag.bold );
 			}
 		},
-		
+
 		addTag: function( tag ) {
 			var include = this.getThemesInList();
 			var themes = this.getThemesWithoutTag( tag ).filter( function( theme ) {
 				return include.indexOf( theme ) >= 0;
 			} );
 			if ( themes.length > 0 ) {
-				if ( opts.commit ) {
+				if ( opts.confirm ) {
 					console.log( '\n%s the [%s] tag:\n', 'Adding'.underline, tag.bold );
 				} else {
 					console.log( '\nWill %s the [%s] tag to the following themes:\n', 'add'.underline, tag.bold );
@@ -247,7 +247,7 @@ function ThemeTags( path, opts ) {
 					var tags = [ tag ].concat( data[ theme ] ).sort();
 					this.updateThemeTags( theme, tags );
 				}, this );
-				if ( opts.commit ) {
+				if ( opts.confirm ) {
 					console.log( '\nDone!\n' );
 				} else {
 					showCommitMessage();
@@ -255,11 +255,11 @@ function ThemeTags( path, opts ) {
 			} else {
 				console.log( '\nAll themes have the [%s] tag.\n', tag.bold );
 			}
-			
+
 		}
 
 	}
-	
+
 }
 
 module.exports = main();
