@@ -163,6 +163,15 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 				'module' => 'custom-content-types',
 			);
 		endif;
+		
+		if ( current_theme_supports( 'jetpack-content-options' ) ) :
+			$dependencies['content-options'] = array(
+				'name' => esc_html__( 'Content Options', 'textdomain' ),
+				'slug' => 'jetpack-content-options',
+				'url'  => '',
+				'module' => 'none',
+			);
+		endif;
 
 		return $dependencies;
 	}
