@@ -4,7 +4,7 @@ This script checks for Jetpack dependencies within the active theme, and, prompt
 
 # How to use it
 
-Download plugin-enhancements.php, and put it somewhere in your theme (`inc` folder is the recommended destination). Next, include it from your theme’s functions.php, like so:
+Download plugin-enhancements.php and plugin-enhancements.js, and put them somewhere in your theme (`inc` folder is the recommended destination). Next, include plugin-enhancements.php from your theme’s functions.php, like so:
 ```php
 /**
  * Load plugin enhancement file to display admin notices.
