@@ -34,4 +34,4 @@ or
 
 # IMPORTANT note about child themes
 
-**Do not** add the script to a chlid theme if it's already in the parent. 
+**Do not** add the script to a child theme if it's already in the parent. 
