@@ -307,7 +307,9 @@ if ( is_dir( $headstart_dir ) ) {
     delete_directory( $headstart_dir );
 }
 // Remove the WPCOM-only custom font annotations file.
-delete_file( $fonts_URI );
+if ( file_exists( $fonts_URI ) ) {
+	delete_file( $fonts_URI );
+}
 
 // Edit .pot file.
 $new_pot = edit_pot( $pot_URI );
