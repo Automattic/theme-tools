@@ -190,6 +190,7 @@ $updater_URI = $theme_dir . 'inc/updater.php';
 $headstart_dir = $theme_dir . 'inc/headstart/';
 $pot_URI = $theme_dir . 'languages/'.$theme.'.pot';
 $footer_URI = $theme_dir . 'footer.php';
+$fonts_URI = $theme_dir . 'inc/jetpack-fonts.php';
 
 // Make sure the theme URI is set correctly.
 function set_theme_URI( $theme, $stylesheet ) {
@@ -304,6 +305,10 @@ delete_file( $updater_URI );
 // Not all themes have Headstart annotations, so let's check if the dir exists first.
 if ( is_dir( $headstart_dir ) ) {
     delete_directory( $headstart_dir );
+}
+// Remove the WPCOM-only custom font annotations file.
+if ( file_exists( $fonts_URI ) ) {
+	delete_file( $fonts_URI );
 }
 
 // Edit .pot file.
