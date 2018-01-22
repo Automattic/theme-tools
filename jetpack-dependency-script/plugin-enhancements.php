@@ -163,7 +163,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 				'module' => 'custom-content-types',
 			);
 		endif;
-		
+
 		if ( current_theme_supports( 'jetpack-content-options' ) ) :
 			$dependencies['content-options'] = array(
 				'name' => esc_html__( 'Content Options', 'textdomain' ),
@@ -373,7 +373,7 @@ class TEXTDOMAIN_Theme_Plugin_Enhancements {
 }
 add_action( 'admin_head', array( 'TEXTDOMAIN_Theme_Plugin_Enhancements', 'init' ) );
 
-function enqueue_scripts() {
+function textdomain_enqueue_scripts() {
 	// Add the admin JS if the notice has not been dismissed
 	if ( is_admin() && get_user_meta( get_current_user_id(), 'textdomain_jetpack_admin_notice', true ) !== 'dismissed' ) {
 
@@ -386,13 +386,13 @@ function enqueue_scripts() {
 		));
 	}
 }
-add_action( 'admin_enqueue_scripts', 'enqueue_scripts' );
+add_action( 'admin_enqueue_scripts', 'textdomain_enqueue_scripts' );
 
 /**
  *	Process the AJAX request on the server and send a response back to the JS.
  *	If nonce is valid, update the current user's meta to prevent notice from displaying.
  */
-function dismiss_admin_notice() {
+function textdomain_dismiss_admin_notice() {
 	// Verify the security nonce and die if it fails
 	if ( ! isset( $_POST['textdomain_jetpack_admin_nonce'] ) || ! wp_verify_nonce( $_POST['textdomain_jetpack_admin_nonce'], 'textdomain_jetpack_admin_nonce' ) ) {
 		wp_die( __( 'Your request failed permission check.', 'textdomain' ) );
@@ -405,5 +405,5 @@ function dismiss_admin_notice() {
 		'message' => __( 'Your request was processed. See ya!', 'textdomain' )
 	) );
 }
-add_action( 'wp_ajax_textdomain_jetpack_admin_notice', 'dismiss_admin_notice' );
+add_action( 'wp_ajax_textdomain_jetpack_admin_notice', 'textdomain_dismiss_admin_notice' );
 
