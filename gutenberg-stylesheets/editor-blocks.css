@@ -1,0 +1,307 @@
+/*
+Theme Name: Theme Name
+Description: Used to style Gutenberg Blocks in the editor.
+*/
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+1.0 General Typography
+2.0 General Block Settings
+3.0 Blocks - Common Blocks
+4.0 Blocks - Formatting
+5.0 Blocks - Layout Elements
+6.0 Blocks - Widgets
+
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+1.0 General Typography
+--------------------------------------------------------------*/
+
+.edit-post-visual-editor .editor-block-list__block,
+.editor-default-block-appender input[type="text"].editor-default-block-appender__content {
+	/* font family */
+}
+
+.edit-post-visual-editor .editor-block-list__block,
+.edit-post-visual-editor .editor-block-list__block p,
+.editor-default-block-appender input[type="text"].editor-default-block-appender__content {
+	/* font size & line height */
+}
+
+.edit-post-visual-editor .editor-block-list__block {
+	/* font colour */
+}
+
+/* Post title */
+
+.editor-post-title__block .editor-post-title__input {
+	/* Post title fonts and colours */
+}
+
+/* Headings - applies to both Classic and Header blocks */
+
+.edit-post-visual-editor h1,
+.wp-block-freeform.block-library-rich-text__tinymce h1,
+.edit-post-visual-editor h2,
+.wp-block-freeform.block-library-rich-text__tinymce h2,
+.edit-post-visual-editor h3,
+.wp-block-freeform.block-library-rich-text__tinymce h3,
+.edit-post-visual-editor h4,
+.wp-block-freeform.block-library-rich-text__tinymce h4,
+.edit-post-visual-editor h5,
+.wp-block-freeform.block-library-rich-text__tinymce h5,
+.edit-post-visual-editor h6,
+.wp-block-freeform.block-library-rich-text__tinymce h6 {
+
+}
+
+.edit-post-visual-editor h1,
+.wp-block-freeform.block-library-rich-text__tinymce h1 {}
+
+.edit-post-visual-editor h2,
+.wp-block-freeform.block-library-rich-text__tinymce h2 {}
+
+.edit-post-visual-editor h3,
+.wp-block-freeform.block-library-rich-text__tinymce h3 {}
+
+.edit-post-visual-editor h4,
+.wp-block-freeform.block-library-rich-text__tinymce h4 {}
+
+.edit-post-visual-editor h5,
+.wp-block-freeform.block-library-rich-text__tinymce h5 {}
+
+.edit-post-visual-editor h6,
+.wp-block-freeform.block-library-rich-text__tinymce h6 {}
+
+
+/*--------------------------------------------------------------
+2.0 General Block Settings
+--------------------------------------------------------------*/
+
+/* Main content width */
+
+.wp-block {
+	/* max-width: XXX -- content width plus 30px to account for editor padding */
+}
+
+/* Link styles */
+
+.edit-post-visual-editor a,
+.editor-block-list__block a,
+.wp-block-freeform.block-library-rich-text__tinymce a {}
+
+/* Table styles */
+
+.wp-block-freeform.block-library-rich-text__tinymce table {}
+
+.wp-block-freeform.block-library-rich-text__tinymce table th,
+.wp-block-freeform.block-library-rich-text__tinymce table td {}
+
+.rtl .wp-block-freeform.block-library-rich-text__tinymce td,
+.rtl .wp-block-freeform.block-library-rich-text__tinymce th {}
+
+/* Quote styles */
+
+.wp-block-freeform.block-library-rich-text__tinymce blockquote {}
+
+.wp-block-freeform.block-library-rich-text__tinymce blockquote cite {}
+
+.rtl .wp-block-freeform.block-library-rich-text__tinymce blockquote {}
+
+/* List styles */
+
+.wp-block-freeform.block-library-rich-text__tinymce li,
+.editor-styles-wrapper li {
+	margin-bottom: 0;
+}
+
+/* Code styles */
+
+.wp-block-freeform.block-library-rich-text__tinymce code {}
+
+/* Caption styles */
+
+[class^="wp-block-"] figcaption {}
+
+/* Definition List styles */
+
+.wp-block-freeform.block-library-rich-text__tinymce dt {
+	font-weight: bold;
+}
+
+/* Pre styles */
+
+.wp-block-freeform.block-library-rich-text__tinymce pre {}
+
+/*--------------------------------------------------------------
+3.0 Blocks - Common Blocks
+--------------------------------------------------------------*/
+
+/* Paragraph */
+
+p.has-drop-cap:not(:focus)::first-letter {}
+
+/* Quote */
+
+.wp-block-quote:not(.is-large):not(.is-style-large) {}
+
+.wp-block-quote .wp-block-quote__citation {}
+
+.wp-block-quote.is-large p,
+.wp-block-quote.is-style-large p {}
+
+.wp-block-quote.is-large .wp-block-quote__citation,
+.wp-block-quote.is-style-large .wp-block-quote__citation {}
+
+.rtl .editor-styles-wrapper .wp-block-quote,
+.rtl .wp-block-quote:not(.is-large):not(.is-style-large) {}
+
+/* Cover */
+
+.edit-post-visual-editor .editor-block-list__block .wp-block-cover-image .wp-block-cover-image-text,
+.edit-post-visual-editor .editor-block-list__block .wp-block-cover-image .wp-block-cover-text,
+.edit-post-visual-editor .editor-block-list__block .wp-block-cover-image h2,
+.edit-post-visual-editor .editor-block-list__block .wp-block-cover .wp-block-cover-image-text,
+.edit-post-visual-editor .editor-block-list__block .wp-block-cover .wp-block-cover-text,
+.edit-post-visual-editor .editor-block-list__block .wp-block-cover h2 {
+	font-size: 2.0em; /* Cover images inherit the paragraph size; this resets it */
+}
+
+/* File */
+
+.wp-block-file__textlink {
+	/* Same as link styles */
+}
+
+.wp-block-file .wp-block-file__button,
+.wp-block-file .wp-block-file__button:visited {}
+
+.wp-block-file .wp-block-file__button:hover,
+.wp-block-file .wp-block-file__button:focus,
+.wp-block-file .wp-block-file__button:active {}
+
+/*--------------------------------------------------------------
+4.0 Blocks - Formatting
+--------------------------------------------------------------*/
+
+/* Verse */
+
+.wp-block-verse {}
+
+.wp-block-verse pre {
+	padding: 0;
+}
+
+/* Code */
+
+.wp-block-code {
+	border: none;
+	border-radius: 0;
+}
+
+.wp-block-code textarea {
+	background: transparent;
+}
+
+/* Preformatted */
+
+.wp-block-preformatted {
+}
+
+/* Pullquote */
+
+.wp-block-pullquote {}
+
+.wp-block-pullquote__citation {}
+
+.wp-block-pullquote.alignleft blockquote > .block-library-pullquote__content .editor-rich-text__tinymce[data-is-empty="true"]::before,
+.wp-block-pullquote.alignright blockquote > .block-library-pullquote__content .editor-rich-text__tinymce[data-is-empty="true"]::before,
+.wp-block-pullquote.alignleft blockquote > .editor-rich-text p,
+.wp-block-pullquote.alignright blockquote > .editor-rich-text p {
+	/* Font size */
+}
+
+/* Table */
+
+.wp-block-table th,
+.wp-block-table td {
+
+}
+
+.wp-block-table th {
+	text-align: left;
+}
+
+.rtl .wp-block-table th {
+	text-align: right;
+}
+
+.wp-block-table__cell-content {
+	padding: 0.5em; /* removes/adjusts padding in editor per cell */
+}
+
+/*--------------------------------------------------------------
+5.0 Blocks - Layout Elements
+--------------------------------------------------------------*/
+
+/* Buttons */
+
+.wp-block-button .wp-block-button__link {}
+
+.wp-block-button .wp-block-button__link:hover,
+.wp-block-button .wp-block-button__link:focus,
+.wp-block-button .wp-block-button__link:active {}
+
+.wp-block-button .editor-rich-text__tinymce.mce-content-body {
+	/* Set a line-height here, if the button height changes when you edit it */
+}
+
+/* Separator */
+
+.wp-block-separator {}
+
+/*--------------------------------------------------------------
+6.0 Blocks - Widgets
+--------------------------------------------------------------*/
+
+/* Categories, Latest Posts & Archives */
+
+[data-align="center"] .wp-block-categories ul,
+[data-align="center"] .wp-block-latest-posts ul,
+[data-align="center"] .wp-block-archives ul {
+	list-style-position: inside; /* makes sure bullets are centred with centred lists */
+}
+
+/* Latest Comments */
+
+.wp-block-latest-comments {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.wp-block-latest-comments__comment-meta,
+.wp-block-latest-comments__comment-excerpt p {
+	/* change font size */
+}
+
+.wp-block-latest-comments__comment-meta a {
+	/* change comment author name and post title styles */
+}
+
+.wp-block-latest-comments__comment-date {
+	/* change comment date styles */
+}
+
+.wp-block-latest-comments .wp-block-latest-comments__comment {
+	selector for each individual comment - good for borders, padding */
+}
+
+/* Latest Posts */
+
+.edit-post-visual-editor .wp-block-latest-posts.is-grid {
+	list-style: none;
+	margin-left: 0;
+	margin-right: 0;
+}
