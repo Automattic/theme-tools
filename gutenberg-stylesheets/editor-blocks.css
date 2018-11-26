@@ -92,6 +92,11 @@ Description: Used to style Gutenberg Blocks in the editor.
 .editor-block-list__block a,
 .wp-block-freeform.block-library-rich-text__tinymce a {}
 
+/* 
+* General HTML selectors, used for the Classic Block 
+* TODO: Could help reduce redundancy to group some of these with the block styles, like table and blockquote 
+*/
+
 /* Table styles */
 
 .wp-block-freeform.block-library-rich-text__tinymce table {}
