@@ -295,7 +295,7 @@ p.has-drop-cap:not(:focus)::first-letter {}
 }
 
 .wp-block-latest-comments .wp-block-latest-comments__comment {
-	selector for each individual comment - good for borders, padding */
+	/* selector for each individual comment - good for borders, padding */
 }
 
 /* Latest Posts */
