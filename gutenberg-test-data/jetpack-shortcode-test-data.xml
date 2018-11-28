@@ -224,9 +224,9 @@ Credit: <a href="http://allrecipes.com/Recipe/Summer-Pasta-with-Basil-Tomatoes-a
 <h4>brightcove</h4>
 <!-- /wp:heading -->
 
-<!-- wp:paragraph -->
-<p><em>can't find functional example</em></p>
-<!-- /wp:paragraph -->
+<!-- wp:shortcode -->
+[brightcove video_id="5617871255001" account_id="1160438696001"]
+<!-- /wp:shortcode -->
 
 <!-- wp:heading {"level":4} -->
 <h4>carto</h4>
