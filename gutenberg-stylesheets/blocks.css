@@ -1,0 +1,282 @@
+/*
+Theme Name: Theme Name
+Description: Used to style blocks.
+*/
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+1.0 Block Alignments
+2.0 General Block Styles
+3.0 Blocks - Common Blocks
+4.0 Blocks - Formatting
+5.0 Blocks - Layout Elements
+6.0 Blocks - Widgets
+7.0 Blocks - Colors
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+1.0 Block Alignments
+--------------------------------------------------------------*/
+
+body .site-content {
+	overflow-x: hidden; /* prevents side-scrolling caused by use of vw */
+}
+
+.alignfull,
+.alignwide {
+	clear: both;
+}
+
+@media (min-width: 1140px) {
+.alignwide {
+		margin-left: -25%;
+		margin-right: -25%;
+		max-width: 1000%;
+		width: auto;
+	}
+
+  /* Make sure YouTube, Vimeo embeds fill entire available space */
+	.wp-block-embed.is-type-video.alignwide iframe {
+		width: 100% !important;
+		height: 100% !important;
+	}
+}
+
+.alignfull {
+	margin-left: calc(50% - 50vw);
+	margin-right: calc(50% - 50vw);
+	max-width: 1000%;
+	width: auto;
+}
+
+/* Make non image-based blocks a bit narrower, so they don't get cut off. */
+.wp-block-columns.alignfull,
+.wp-block-audio.alignfull,
+.wp-block-table.alignfull,
+.wp-block-latest-comments.alignfull,
+.wp-block-categories.alignfull,
+.wp-block-archives.alignfull,
+.wp-block-latest-posts.alignfull {
+	margin-left: calc(50% - 48vw);
+	margin-right: calc(50% - 48vw);
+}
+
+.wp-block-embed.is-type-video iframe {
+	max-height: 100%;
+}
+
+/* Make sure YouTube, Vimeo embeds fill entire available space */
+.wp-block-embed.is-type-video.alignfull iframe {
+	width: 100% !important;
+	height: 100% !important;
+}
+
+/*--------------------------------------------------------------
+2.0 General Block Styles
+--------------------------------------------------------------*/
+
+[class^="wp-block-"] figcaption {}
+
+[class^="wp-block-"]:not(.wp-block-gallery) figcaption {
+	color: inherit;
+}
+
+/*--------------------------------------------------------------
+3.0 Blocks - Common Blocks
+--------------------------------------------------------------*/
+
+/* Paragraph */
+
+p.has-drop-cap:not(:focus)::first-letter {
+	font-size: 5em;
+	/* margin-top: 0.15em; -- adjust for better alignment */
+}
+
+/* Gallery */
+
+.wp-block-gallery {}
+
+/* Quote */
+
+.wp-block-quote.is-large,
+.wp-block-quote.is-style-large {}
+
+.rtl .wp-block-quote.is-large,
+.rtl .wp-block-quote.is-style-large {}
+
+/* Audio */
+
+.wp-block-audio {}
+
+.wp-block-audio audio {
+	display: block;
+	width: 100%;
+}
+
+/* Cover */
+
+.wp-block-cover.aligncenter,
+.wp-block-cover-image.aligncenter,
+.wp-block-cover.alignleft,
+.wp-block-cover-image.alignleft,
+.wp-block-cover.alignright,
+.wp-block-cover-image.alignright {
+  display: flex; /* If the theme's align styles override this */
+}
+
+.wp-block-cover-image .wp-block-cover-image-text,
+.wp-block-cover-image .wp-block-cover-text,
+.wp-block-cover-image h2,
+.wp-block-cover .wp-block-cover-image-text,
+.wp-block-cover .wp-block-cover-text,
+.wp-block-cover h2 {
+/* Font size */
+}
+
+/* File */
+
+.wp-block-file a.wp-block-file__button,
+.wp-block-file a.wp-block-file__button:visited {
+  /* Copy button styles */
+}
+
+.wp-block-file a.wp-block-file__button:hover,
+.wp-block-file a.wp-block-file__button:focus,
+.wp-block-file a.wp-block-file__button:active {
+  /* Copy button styles */
+}
+
+/* Video */
+
+.wp-block-video video {
+	width: 100%;
+}
+
+/*--------------------------------------------------------------
+4.0 Blocks - Formatting
+--------------------------------------------------------------*/
+
+/* Verse */
+
+.wp-block-verse {
+	background: transparent;
+	font-family: inherit;
+	font-style: italic;
+	padding: 0;
+}
+
+/* Pullquote */
+
+.wp-block-pullquote blockquote {
+}
+
+.wp-block-pullquote cite,
+.wp-block-pullquote.alignleft cite,
+.wp-block-pullquote.alignright cite {
+
+}
+
+/* Table */
+
+@media (min-width: 1130px) {
+/* Make sure YouTube, Vimeo embeds fill entire available space */
+  .wp-block-table.alignwide {
+		width: 1050px;
+	}
+}
+
+.wp-block-table.alignfull {
+	width: 96vw;
+}
+
+/*--------------------------------------------------------------
+5.0 Blocks - Layout Elements
+--------------------------------------------------------------*/
+
+/* Buttons */
+
+.wp-block-button .wp-block-button__link {
+}
+
+.wp-block-button__link {
+	/* Separate out background and color to make sure custom colours can override */
+}
+
+.wp-block-button__link.has-background:hover,
+.wp-block-button__link.has-background:focus,
+.wp-block-button__link.has-background:active {
+	opacity: 0.8;
+}
+
+/* Separator */
+
+.wp-block-separator {
+}
+
+.wp-block-separator:not(.is-style-wide):not(.is-style-dots) {
+}
+
+/* Media & Text */
+
+.wp-block-media-text {
+}
+
+.wp-block-media-text *:last-child {
+	margin-bottom: 0;
+}
+
+/*--------------------------------------------------------------
+6.0 Blocks - Widgets
+--------------------------------------------------------------*/
+
+/* General Widget styles */
+
+.wp-block-categories.aligncenter,
+.wp-block-categories.aligncenter ul,
+.wp-block-archives.aligncenter,
+.wp-block-latest-posts.aligncenter,
+.wp-block-latest-comments.aligncenter {
+	list-style-position: inside;
+	text-align: center;
+}
+
+/* Latest Comments */
+
+.wp-block-latest-comments {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.wp-block-latest-comments__comment-date,
+.wp-block-latest-comments__comment-excerpt p {
+	color: inherit;
+	font-size: inherit;
+}
+
+/* Latest Posts */
+
+.wp-block-latest-posts.is-grid {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+/*--------------------------------------------------------------
+7.0 Blocks - Colors
+--------------------------------------------------------------*/
+
+.has-pale-pink-color,
+.has-pale-pink-color:hover,
+.has-pale-pink-color:focus,
+.has-pale-pink-color:active,
+.has-pale-pink-color:visited {
+
+}
+
+.has-pale-pink-background-color,
+.has-pale-pink-background-color:hover.
+.has-pale-pink-background-color:focus,
+.has-pale-pink-background-color:active,
+.has-pale-pink-background-color:visited {
+	
+}
