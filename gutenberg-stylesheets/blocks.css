@@ -28,19 +28,11 @@ body .site-content {
 	clear: both;
 }
 
-@media (min-width: 1140px) {
 .alignwide {
-		margin-left: -25%;
-		margin-right: -25%;
-		max-width: 1000%;
-		width: auto;
-	}
-
-  /* Make sure YouTube, Vimeo embeds fill entire available space */
-	.wp-block-embed.is-type-video.alignwide iframe {
-		width: 100% !important;
-		height: 100% !important;
-	}
+	margin-left: -25%;
+	margin-right: -25%;
+	max-width: 1000%;
+	width: auto;
 }
 
 .alignfull {
@@ -51,6 +43,7 @@ body .site-content {
 }
 
 /* Make non image-based blocks a bit narrower, so they don't get cut off. */
+
 .wp-block-columns.alignfull,
 .wp-block-audio.alignfull,
 .wp-block-table.alignfull,
@@ -62,21 +55,24 @@ body .site-content {
 	margin-right: calc(50% - 48vw);
 }
 
-.wp-block-embed.is-type-video iframe {
-	max-height: 100%;
-}
-
 /* Make sure YouTube, Vimeo embeds fill entire available space */
+.wp-block-embed.is-type-video.alignwide iframe,
 .wp-block-embed.is-type-video.alignfull iframe {
 	width: 100% !important;
 	height: 100% !important;
+}
+
+.wp-block-embed.is-type-video iframe {
+	max-height: 100%;
 }
 
 /*--------------------------------------------------------------
 2.0 General Block Styles
 --------------------------------------------------------------*/
 
-[class^="wp-block-"] figcaption {}
+[class^="wp-block-"] figcaption {
+	/* Update to match theme's caption styles */
+}
 
 [class^="wp-block-"]:not(.wp-block-gallery) figcaption {
 	color: inherit;
@@ -179,15 +175,14 @@ p.has-drop-cap:not(:focus)::first-letter {
 
 /* Table */
 
-@media (min-width: 1130px) {
-/* Make sure YouTube, Vimeo embeds fill entire available space */
-  .wp-block-table.alignwide {
-		width: 1050px;
-	}
+.wp-block-table.alignfull {
+	width: 96vw; /* Make sure table fits available space */
 }
 
-.wp-block-table.alignfull {
-	width: 96vw;
+@media (min-width: XXXXpx) {
+	.wp-block-table.alignwide {
+		width: XXXXpx; /* Similar to the above, but usually needs to be adjusted based on breakpoints */
+	}
 }
 
 /*--------------------------------------------------------------
@@ -206,7 +201,7 @@ p.has-drop-cap:not(:focus)::first-letter {
 .wp-block-button__link.has-background:hover,
 .wp-block-button__link.has-background:focus,
 .wp-block-button__link.has-background:active {
-	opacity: 0.8;
+	/* Optionally change opacity on hover when background is overridden */
 }
 
 /* Separator */
@@ -250,8 +245,7 @@ p.has-drop-cap:not(:focus)::first-letter {
 
 .wp-block-latest-comments__comment-date,
 .wp-block-latest-comments__comment-excerpt p {
-	color: inherit;
-	font-size: inherit;
+
 }
 
 /* Latest Posts */
