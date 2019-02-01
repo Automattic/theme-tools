@@ -1,6 +1,6 @@
 ## Gutenberg Style Variations
 
-1. Common Blocks
+1. **Common Blocks**
     1. Paragraph
         * Dropcap
         * Colours - background, text
@@ -23,7 +23,7 @@
     10. Video
         * Wide widths
 
-2. Formatting
+2. **Formatting**
     1. Verse
     2. Code
     3. Classic
@@ -37,7 +37,7 @@
         * Block styles - regular, stripes
         * Wide widths
 
-3. Layout Elements
+3. **Layout Elements**
     1. Buttons
         * Block styles - rounded (default), square, outlined
         * Colors - background, text
@@ -53,7 +53,7 @@
         * Wide widths
         * Left and right layouts
 
-4. Widgets
+4. **Widgets**
     1. Shortcode
     2. Archives
         * Left, right, centre alignments
