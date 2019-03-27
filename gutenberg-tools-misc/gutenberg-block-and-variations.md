@@ -72,6 +72,6 @@
         * Settings - display date
 
 5. **In Development**
-    1. Container - https://github.com/WordPress/gutenberg/issues/4900
+    1. Section - https://github.com/WordPress/gutenberg/issues/4900
         * Wide widths
         * Colors - background
