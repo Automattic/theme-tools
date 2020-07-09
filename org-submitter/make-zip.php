@@ -129,9 +129,8 @@ function download_file( $URI, $filename ) {
  * Now we start actually doing stuff!
  */
 
-// First, download the theme from our Showcase.
+// Reference a local copy of the theme zip.
 $theme_zip = $theme . '.zip';
-download_file( 'https://public-api.wordpress.com/rest/v1/themes/download/' . $theme . '.zip', $theme_zip );
 
 // Unzip it!
 $path = pathinfo( realpath( $theme_zip ), PATHINFO_DIRNAME );
@@ -146,11 +145,9 @@ if ( $res === true ) {
 	exit( "Oh no! I couldn't open $theme_zip." );
 }
 
-// Download our stylesheet from the public svn repo.
-$theme_stylesheet = $theme . '.css';
-download_file( 'https://wpcom-themes.svn.automattic.com/' . $theme . '/style.css', $theme_stylesheet );
+// Read the contents of the theme stylesheet
+$theme_stylesheet = $theme . '-wpcom/style.css';
 $stylesheet = read_file( $theme_stylesheet );
-delete_file( $theme_stylesheet );
 
 // Get a list of tags for the .org version of the theme.
 function get_theme_tags( $theme, $stylesheet ) {
