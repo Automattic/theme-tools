@@ -7,8 +7,8 @@
     "node": ">= 0.10.x"
   },
   "dependencies": {
-    "minimist": "1.2.0",
+    "minimist": "1.2.8",
     "colors": "1.1.2",
-    "css": "2.2.1"
+    "css": "2.2.4"
   }
 }

@@ -13,7 +13,7 @@
     "npm": ">=1.1.0"
   },
   "dependencies": {
-    "colors": "^1.1.2",
+    "colors": "1.4.0",
     "minimist": "^1.2.0",
     "underscore": "^1.8.3"
   }
